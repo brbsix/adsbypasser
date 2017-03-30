@@ -17,9 +17,15 @@ $.register({
     setTimeout(function () {
       var clip = function (u) {
         GM_setClipboard(u);
+
+        var title = (function () {
+          var meta = document.querySelector('meta[name="description"]');
+          return meta !== null ? meta.content : window.location.pathname.split('/').pop().split('#')[0].split('?')[0];
+        })();
+
         GM_notification(
           'Direct download link stored in clipboard',
-          'AdsBypasser',
+          title,
           'https://openload.co/favicon.ico'
         );
       };
