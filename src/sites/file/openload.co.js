@@ -15,6 +15,15 @@ $.register({
     'use strict';
 
     setTimeout(function () {
+      var clip = function (u) {
+        GM_setClipboard(u);
+        GM_notification(
+          'Direct download link stored in clipboard',
+          'AdsBypasser',
+          'https://openload.co/favicon.ico'
+        );
+      };
+
       var timer = $('#downloadTimer');
       timer.style.display = 'none';
 
@@ -45,9 +54,9 @@ $.register({
 
         _.info(_.T('{0} -> {1}')(window.location, dlBtn.href));
 
-        dlBtn.click();
+        clip(dlBtn.href);
       } else {
-        $.openLink(dlBtn.href);
+        clip(dlBtn.href);
       }
     }, 500);
   }

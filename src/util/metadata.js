@@ -11,6 +11,8 @@
 // @icon           https://raw.githubusercontent.com/adsbypasser/adsbypasser/v<%= pkg.version %>/img/logo.png
 // @grant          unsafeWindow
 // @grant          GM_xmlhttpRequest
+// @grant          GM_setClipboard
+// @grant          GM_notification
 <% if (!lite) { %>
 // @grant          GM_addStyle
 // @grant          GM_getResourceText

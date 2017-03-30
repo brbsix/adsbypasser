@@ -1,3 +1,7 @@
+# Changes in this fork
+
+* Instead of starting downloads from https://openload.co automatically, copy the direct download link to the clipboard. A notification is displayed as a reminder.
+
 # AdsBypasser
 
 This user script helps you to
