@@ -1,3 +1,13 @@
+## v5.66.0
+
+* fixed
+    * ouo.io
+    * img.yt
+* added
+    * hashe.in
+    * cut-urls.com
+    * tmearn.com
+
 ## v5.65.0
 
 * fixed

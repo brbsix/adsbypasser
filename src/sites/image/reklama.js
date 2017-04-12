@@ -293,11 +293,7 @@
       host: /^img\.yt$/,
       path: /^\/img-.*\.html/,
     },
-    ready: _.P(action, '#continuebutton', 'img[class^=centred]'),
+    ready: _.P(action, '#continuebutton, #continuetoimage input[type="submit"]', 'img[class^=centred]'),
   });
 
 })();
-
-// ex: ts=2 sts=2 sw=2 et
-// sublime: tab_size 2; translate_tabs_to_spaces true; detect_indentation false; use_tab_stops true;
-// kate: space-indent on; indent-width 2;

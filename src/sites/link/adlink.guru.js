@@ -11,11 +11,14 @@
         /^(payurl|urlst)\.me$/,
         /^url\.ht$/,
         /^urle\.co$/,
+        /^cut-urls\.com$/,
+        /^hashe\.in$/,
         /^www\.worldhack\.net$/,
         /^123link\.top$/,
         /^pir\.im$/,
         /^bol\.tl$/,
         /^tl\.tc$/,
+        /^tmearn\.com$/,
       ],
     },
     ready: function () {
@@ -72,7 +75,3 @@
   }
 
 })();
-
-// ex: ts=2 sts=2 sw=2 et
-// sublime: tab_size 2; translate_tabs_to_spaces true; detect_indentation false; use_tab_stops true;
-// kate: space-indent on; indent-width 2;
