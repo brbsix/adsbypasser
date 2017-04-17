@@ -1,3 +1,14 @@
+## v5.67.0
+
+* fixed
+    * imgrock.net
+    * imgtaxi.com
+    * shrink-service.it
+    * shink.in
+    * al.ly
+* added
+    * cllkme.com
+
 ## v5.66.0
 
 * fixed
