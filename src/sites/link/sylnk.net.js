@@ -39,6 +39,7 @@ $.register({
         /^ww[23]\.picnictrans\.com$/,
         /^gadget13\.com$/,
         /^azhie\.net$/,
+        /^ww2\.awsubs\.co$/,
       ],
       query: /^\?d=([a-zA-Z0-9\/=]+)$/,
     },
@@ -61,7 +62,11 @@ $.register({
     // blogspot, kind of brutal
     {
       host: /\.blogspot\.com?/,
-      query: /^\?url=([a-zA-Z0-9\/=]+)$/,
+      query: [
+        // id must be the first captured group
+        /^\?url=([a-zA-Z0-9\/=]+)$/,
+        /^\?id=([a-zA-Z0-9\/=]+)$/,
+      ],
     },
     {
       host: /^sehatlega\.com$/,
@@ -105,6 +110,7 @@ $.register({
         /^www\.muucih\.com$/,
         /^(naisho|filmku)\.lompat\.in$/,
         /^edogawa\.lon\.pw$/,
+        /^telolet\.in$/,
       ],
       query: /go=(\w+=*)/,
     },
@@ -148,7 +154,7 @@ $.register({
       /^(autofans|landscapenature)\.pw$/,
       /^ani-share\.com$/,
       /^sinopsisfilmku\.com$/,
-      /^sidespace\.net$/,
+      /^(sidespace|erogedownload)\.net$/,
     ],
     query: /get=([^&]+)/,
   },
@@ -181,7 +187,10 @@ $.register({
 
 $.register({
   rule: {
-    host: /^ww[23]\.picnictrans\.com$/,
+    host: [
+      /^ww[23]\.picnictrans\.com$/,
+      /^short\.awsubs\.co$/,
+    ],
   },
   ready: function () {
     'use strict';

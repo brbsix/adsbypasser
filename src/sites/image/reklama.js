@@ -84,7 +84,7 @@
           /^darpix\.desi$/,
           /^pic4you\.top$/,
           /^imgsen\.se$/,
-          /^ipicture\.su$/
+          /^ipicture\.su$/,
         ],
         path: /^\/img-.*\.html/,
       },
@@ -115,6 +115,10 @@
       {
         host: /^imgtor\.pw$/,
         path: /^\/img2\/.+$/,
+      },
+      {
+        host: /^ima\.gy$/,
+        path: /^\/i\/.+$/,
       },
     ],
     ready: defaultAction,
