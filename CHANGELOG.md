@@ -1,3 +1,8 @@
+## v5.68.2
+
+* fixed
+    * adf.ly sub-domains
+
 ## v5.68.1
 
 * fixed
