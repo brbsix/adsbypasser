@@ -22,6 +22,7 @@ pull:
 	git push
 
 node_modules: package.json pull
+	npm prune
 	npm install
 
 dest: node_modules src
