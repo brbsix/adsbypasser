@@ -1,11 +1,11 @@
 MAKEFLAGS += --warn-undefined-variables 
 .DEFAULT_GOAL := all
 
-# indicate whether to use "Lite" version
+# indicate whether to use "Lite" release
 # (can be overridden in environment)
-LITE ?= true
+LITE_RELEASE ?= true
 
-ifeq ($(LITE), true)
+ifeq ($(LITE_RELEASE), true)
 VERSION := lite
 else
 VERSION :=
