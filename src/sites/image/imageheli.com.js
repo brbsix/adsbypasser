@@ -1,6 +1,10 @@
 $.register({
   rule: {
-    host: /^imageheli\.com|imgtube\.net|pixliv\.com$/,
+    host: [
+      /^imageheli\.com$/,
+      /^imgtube\.net$/,
+      /^pixliv\.com$/,
+    ],
     path: /^\/img-([a-zA-Z0-9\-]+)\..+$/,
   },
   ready: function () {
