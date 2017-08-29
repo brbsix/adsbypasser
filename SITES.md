@@ -15,6 +15,7 @@
     * galleries.bz
     * goneviral.com
     * hornywood.tv
+    * jzrputtbut.net
     * linkbabes.com
     * linkbucks.com
     * megaline.co
@@ -68,6 +69,7 @@
     * 08lkk.com
     * 18pron.ru
     * 24avarii.ru
+    * acidimg.cc
     * ads-img.info
     * adultimg.org
     * bokimage.com
@@ -476,6 +478,7 @@
     * imgmaze.com
     * imgmega.com
     * imgmonkey.com
+    * imgoutlet.co
     * imgoutlet.com
     * imgpaying.com
     * imgrock.net
@@ -610,6 +613,7 @@
     * link.animagz.org
     * sipkur.net
     * sipkur.us
+    * telondasmu.com
 * imgnova.xyz
     * hentai-hot.xyz
     * hentai-king.online
@@ -670,9 +674,6 @@
 * al.ly
     * al.ly
     * ally.sh
-* igg-games.com
-    * igg-games.com
-    * igg-games.co
 * allkeyshop.com
     * allkeyshop.com
     * cshort.org
@@ -879,6 +880,7 @@
     * thinfi.com
     * tinyarrows.com
     * tinypic.com
+    * topload.pro
     * turboimagehost.com
     * typ.me
     * ulmt.in

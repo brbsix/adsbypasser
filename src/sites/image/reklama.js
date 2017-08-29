@@ -39,7 +39,7 @@
           /^(zonezeed|zelje|croft|myhot|bok|hostur|greasy|dam)image\.com$/,
           // starts with img
           /^img(icy|next|savvy|\.spicyzilla|twyti|xyz|devil|tzar|ban|pu|beer|wet|tornado|kicks|nimz|binbou|2share|22|cover|hit|main|trial|blank|reputa|fapper|reality)\.com$/,
-          /^imgseeds?\.com$/,
+          /^(i\.)?imgseeds?\.com$/,
           // starts with img-
           /^img-(zone|planet|pay|uploads)\.com$/,
           // starts with www
@@ -85,6 +85,7 @@
           /^pic4you\.top$/,
           /^imgsen\.se$/,
           /^ipicture\.su$/,
+          /^acidimg\.cc$/,
         ],
         path: /^\/img-.*\.html/,
       },
@@ -168,7 +169,7 @@
       path: /^\/img-.*\.html$/,
     },
     start: function () {
-      var c = $.getCookie('img_c_d') || $.getCookie('img_p_d');
+      var c = $.getCookie('ibpuc');
       if (c) {
         return;
       }
@@ -176,6 +177,9 @@
         cti: 1,
         ref: '',
         rc: 1,
+        rp: 1,
+        bt: 0,
+        bw: 'edge',
       }).then(function (data) {
         window.location.reload();
       });
