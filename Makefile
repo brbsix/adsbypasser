@@ -1,4 +1,4 @@
-MAKEFLAGS += --warn-undefined-variables 
+MAKEFLAGS += --warn-undefined-variables
 .DEFAULT_GOAL := all
 
 # indicate whether to use "Lite" release
