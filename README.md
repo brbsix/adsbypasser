@@ -15,11 +15,6 @@ Forked from [RedirectionHelper] written by [SuYS].
 
 Please install from [home page][1].
 
-Mirrors:
-
-* Greasy Fork [full][2], [lite][3]
-* OpenUserJS.org [full][4], [lite][5]
-
 [![Build Status][6]][7]
 
 
@@ -36,29 +31,23 @@ For more information, please see [here][9].
 
 ## How To Build
 
-Please install [Node.js] and [npm], then run:
+Please install [Node.js], then run:
 
 ```
 npm install
 npm run build
 ```
 
-Combined userscript will be `dest/adsbypasser.user.js`,
-which you could install on the web browser.
+Combined userscript will be `build/adsbypasser.full.es7.user.js`.
 
 For more information, please see [Wiki].
 
 [1]: https://adsbypasser.github.io/
-[2]: https://greasyfork.org/scripts/4881-adsbypasser
-[3]: https://greasyfork.org/scripts/4882-adsbypasserlite
-[4]: https://openuserjs.org/scripts/legnaleurc/AdsBypasser
-[5]: https://openuserjs.org/scripts/legnaleurc/AdsBypasserLite
 [6]: https://travis-ci.org/adsbypasser/adsbypasser.png?branch=master,develop
 [7]: https://travis-ci.org/adsbypasser/adsbypasser
 [8]: https://adsbypasser.github.io/configure.html
 [9]: https://github.com/adsbypasser/adsbypasser/wiki/Runtime-Configurations
-[Node.js]: https://nodejs.org
-[npm]: https://www.npmjs.com/
+[Node.js]: https://nodejs.org/
 [RedirectionHelper]: https://userscripts-mirror.org/scripts/show/69797
 [SuYS]: https://userscripts-mirror.org/users/SuYS.html
 [Wiki]: https://github.com/adsbypasser/adsbypasser/wiki

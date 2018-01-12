@@ -1,8 +1,8 @@
 .DS_Store
 /node_modules
-dest
 .deploy.json
-*.pyc
 .idea/
 *.log
-.save.sh
+/.save.sh
+/build
+/package-lock.json

@@ -1,51 +1,45 @@
 (function () {
-  'use strict';
 
-  function getTokenFromRocketScript () {
-    var a = $.searchScripts(/var eu = '(?!false)(.*)'/);
-    return a ? a[1] : null;
-  }
-
-  $.register({
+  _.register({
     rule: {
       host: /^adf\.ly$/,
       path: /^\/redirecting\/(.+)$/,
     },
-    start: function (m) {
-      var url = atob(m.path[1]);
-      $.openLink(url);
+    async start (m) {
+      const url = atob(m.path[1]);
+      await $.openLink(url);
     },
   });
 
-  $.register({
+  _.register({
     rule: {
       path: /\/locked$/,
       query: /url=([^&]+)/,
     },
-    start: function (m) {
+    async start (m) {
       $.resetCookies();
-      var url = decodeURIComponent(m.query[1]);
+      const url = decodeURIComponent(m.query[1]);
       if (url.match(/^http/)) {
         // absolute path
-        $.openLink(url);
+        await $.openLink(url);
       } else {
         // related path
-        $.openLink('/' + url);
+        await $.openLink('/' + url);
       }
     },
   });
 
-  $.register({
+  _.register({
     // generic pattern
-    rule: function () {
-      var h = $.$('html[id="main_html"]');
+    rule () {
+      const h = $.$('html[id="main_html"]');
       if (h) {
         return true;
       } else {
         return null;
       }
     },
-    start: function () {
+    async start () {
       // Rocket Loader will modify DOM before `ready()` can do anything,
       // so we hack `document.write` to block CloudFlare's main script.
       // after this the inline script will fail, and leave DOM alone.
@@ -53,45 +47,43 @@
       // break anti-adblock script
       $.window.btoa = _.nop;
 
-      waitToken().then(function (token) {
-        var url = decodeToken(token);
-        $.openLink(url);
-      }).catch(function (e) {
-        _.warn(e);
-      });
+      await waitDocumentHead();
+      const token = await waitToken();
+      const url = decodeToken(token);
+      await $.openLink(url);
     },
-    ready: function () {
+    async ready () {
       // check if this is ad page
-      var h = $.$('#main_html'), b = $.$('#home');
+      const h = $.$('#main_html'), b = $.$('#home');
       if (!h || !b || h.nodeName !== 'HTML' || b.nodeName !== 'BODY') {
         // this is not a ad page
         return;
       }
 
-      $.removeNodes('iframe');
+      $.remove('iframe');
 
       // disable cookie check
       $.window.cookieCheck = _.nop;
 
-      h = getTokenFromRocketScript();
-      if (!h) {
-        h = $('#adfly_bar');
+      let token = getTokenFromRocketScript();
+      if (!token) {
+        token = $('#adfly_bar');
         $.window.close_bar();
         return;
       }
-      h = decodeToken(h);
-      $.openLink(h);
+      token = decodeToken(token);
+      await $.openLink(token);
     },
   });
 
 
   function waitToken () {
-    return _.D(function (resolve) {
-      var o = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-          _.C(mutation.addedNodes).each(function (node) {
+    return new Promise((resolve) => {
+      const o = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          _.forEach(mutation.addedNodes, (node) => {
             if (node.localName === 'script') {
-              var m = node.textContent.match(/var ysmm = '([^']+)'/);
+              const m = node.textContent.match(/var ysmm = '([^']+)'/);
               if (m) {
                 o.disconnect();
                 resolve(m[1]);
@@ -107,26 +99,66 @@
   }
 
 
+  function waitDocumentHead () {
+    return new Promise((resolve) => {
+      if (document.head) {
+        resolve();
+        return;
+      }
+      const o = new MutationObserver(() => {
+        if (document.head) {
+          o.disconnect();
+          resolve();
+        }
+      });
+      o.observe(document.documentElement, {
+        childList: true,
+      });
+    });
+  }
+
+
   function decodeToken (token) {
-    var a = token.indexOf('!HiTommy');
-    if (a >= 0) {
-      token = token.substring(0, a);
-    }
-    a = '';
-    var b = '';
-    for (var i = 0; i < token.length; ++i) {
+    let a = '';
+    let b = '';
+    for (let i = 0; i < token.length; ++i) {
       if (i % 2 === 0) {
         a = a + token.charAt(i);
       } else {
         b = token.charAt(i) + b;
       }
     }
-    token = atob(a + b);
-    token = token.substr(2);
+    token = a + b;
+    a = token.split('');
+    for (let i = 0; i < a.length; ++i) {
+      if (/\d/.test(a[i])) {
+        for (let j = i + 1; j < a.length; ++j) {
+          if (/\d/.test(a[j])) {
+            b = a[i] ^ a[j];
+            if (b < 10) {
+              a[i] = b;
+            }
+            i = j;
+            j = a.length;
+          }
+        }
+      }
+    }
+    token = a.join('');
+    token = atob(token);
+    token = token.substring(16);
+    token = token.substring(0, token.length - 16);
+
     if (location.hash) {
       token += location.hash;
     }
     return token;
+  }
+
+
+  function getTokenFromRocketScript () {
+    const a = $.searchFromScripts(/const eu = '(?!false)(.*)'/);
+    return a ? a[1] : null;
   }
 
 })();

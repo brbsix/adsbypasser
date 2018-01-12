@@ -1,139 +1,176 @@
-(function (context, factory) {
-  if (typeof module === 'object' && typeof module.exports === 'object') {
-    module.exports = function (context, GM) {
-      var core = require('./core.js');
-      return factory(context, GM, core);
-    };
-  } else {
-    factory(context, {
-      xmlhttpRequest: GM_xmlhttpRequest,
-    }, context._);
-  }
-}(this, function (context, GM, _) {
-  'use strict';
-
-  var window = context.window;
-  var document = window.document;
-  var $ = context.$ || {};
+import {
+  AdsBypasserError,
+  map,
+  forEach,
+  none,
+} from 'util/core';
+import {
+  GMAPI,
+} from 'util/platform';
 
 
-  function deepJoin (prefix, object) {
-    return _.C(object).map(function (v, k) {
-      var key = _.T('{0}[{1}]')(prefix, k);
-      if (typeof v === 'object') {
-        return deepJoin(key, v);
-      }
-      return _.T('{0}={1}').apply(this, [key, v].map(encodeURIComponent));
-    }).join('&');
+class AjaxError extends AdsBypasserError {
+
+  constructor (method, url, data, headers, status, response) {
+    super(`${method} ${url} got ${status}`);
+
+    this._method = method;
+    this._url = url;
+    this._data = data;
+    this._headers = headers;
+    this._status = status;
+    this._response = response;
   }
 
-  function toQuery (data) {
-    var type = typeof data;
-    if (data === null || (type !== 'string' && type !== 'object')) {
-      return '';
-    }
-    if (type === 'string') {
-      return data;
-    }
-    if (data instanceof String) {
-      return data.toString();
-    }
-    return _.C(data).map(function (v, k) {
-      if (typeof v === 'object') {
-        return deepJoin(k, v);
-      }
-      return _.T('{0}={1}').apply(this, [k, v].map(encodeURIComponent));
-    }).join('&');
+  get name () {
+    return 'AjaxError';
   }
 
-  function ajax (method, url, data, headers) {
-    // Host is not always the same as window.location.host, for example foo.example.org can perform a request to example.org
-    var l = document.createElement('a');
-    l.href = url;
-    var reqHost = l.hostname;
-    var overrideHeaders = {
-      Host: reqHost || window.location.host,
-      Origin: window.location.origin,
-      Referer: window.location.href,
-      'X-Requested-With': 'XMLHttpRequest',
-    };
-
-    // Allow to perform a request without certain parameters by passsing _.none
-    _.C(overrideHeaders).each(function (v, k, c) {
-      if (headers[k] === _.none) {
-        delete headers[k];
-      } else {
-        headers[k] = v;
-      }
-    });
-
-    // deal with payload in POST
-    if (data) {
-      if (headers['Content-Type'].indexOf('json') >= 0) {
-        data = JSON.stringify(data);
-      } else {
-        data = toQuery(data);
-      }
-      headers['Content-Length'] = data.length;
-    }
-
-    var xhr = null;
-    var promise = _.D(function (resolve, reject) {
-      xhr = GM.xmlhttpRequest({
-        method: method,
-        url: url,
-        data: data,
-        headers: headers,
-        onload: function (response) {
-          // HACK use this as fallback for zombie.js
-          response = (typeof response.responseText !== 'undefined') ? response : this;
-          if (response.status !== 200) {
-            reject(response.responseText);
-          } else {
-            resolve(response.responseText);
-          }
-        },
-        onerror: function (response) {
-          // HACK use this as fallback for zombie.js
-          response = (typeof response.responseText !== 'undefined') ? response : this;
-          reject(response.responseText);
-        },
-      });
-    });
-    // Firefox 36+ does not like Function.bind
-    promise.abort = function () {
-      xhr.abort();
-    };
-
-    return promise;
+  get method () {
+    return this._method;
   }
 
-  $.get = function (url, data, headers) {
-    data = toQuery(data);
-    // Don't request with '?' if there is no data
-    data = data ? '?' + data : '';
-    headers = headers || {};
-    return ajax('GET', url + data, '', headers);
+  get url () {
+    return this._url;
+  }
+
+  get data () {
+    return this._data;
+  }
+
+  get headers () {
+    return this._headers;
+  }
+
+  get status () {
+    return this._status;
+  }
+
+  get response () {
+    return this._response;
+  }
+
+}
+
+
+function deepJoin (prefix, object) {
+  const keys = Object.getOwnPropertyNames(object);
+  const mapped = map(keys, (k) => {
+    const v = object[k];
+    const key = `${prefix}[${k}]`;
+    if (typeof v === 'object') {
+      return deepJoin(key, v);
+    }
+    const tmp = [key, v].map(encodeURIComponent);
+    return tmp.join('=');
+  });
+  return mapped.join('&');
+}
+
+
+function toQuery (data) {
+  const type = typeof data;
+  if (data === null || (type !== 'string' && type !== 'object')) {
+    return '';
+  }
+  if (type === 'string') {
+    return data;
+  }
+  if (data instanceof String) {
+    return data.toString();
+  }
+  const keys = Object.getOwnPropertyNames(data);
+  return map(keys, (k) => {
+    const v = data[k];
+    if (typeof v === 'object') {
+      return deepJoin(k, v);
+    }
+    const tmp = [k, v].map(encodeURIComponent);
+    return tmp.join('=');
+  }).join('&');
+}
+
+
+function ajax (method, url, data, headers) {
+  // Host is not always the same as window.location.host, for example
+  // foo.example.org can perform a request to example.org
+  const l = document.createElement('a');
+  l.href = url;
+  const reqHost = l.hostname;
+  const overrideHeaders = {
+    Host: reqHost || window.location.host,
+    Origin: window.location.origin,
+    Referer: window.location.href,
+    'X-Requested-With': 'XMLHttpRequest',
   };
 
-  $.post = function (url, data, headers) {
-    var h = {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    };
-    if (headers) {
-      _.C(headers).each(function (v, k) {
-        h[k] = v;
-      });
+  // Allow to perform a request without certain parameters by passsing _.none
+  forEach(overrideHeaders, (v, k) => {
+    if (headers[k] === none) {
+      delete headers[k];
+    } else {
+      headers[k] = v;
     }
-    return ajax('POST', url, data, h);
+  });
+
+  // deal with payload in POST
+  if (data) {
+    if (headers['Content-Type'].indexOf('json') >= 0) {
+      data = JSON.stringify(data);
+    } else {
+      data = toQuery(data);
+    }
+    headers['Content-Length'] = data.length;
+  }
+
+  return new Promise((resolve, reject) => {
+    GMAPI.xmlHttpRequest({
+      method: method,
+      url: url,
+      data: data,
+      headers: headers,
+      onload (response) {
+        // HACK use this as fallback for zombie.js
+        response = (typeof response.responseText !== 'undefined') ? response : this;
+        if (response.status !== 200) {
+          reject(new AjaxError(method, url, data, headers, response.status, response.responseText));
+        } else {
+          resolve(response.responseText);
+        }
+      },
+      onerror (response) {
+        // HACK use this as fallback for zombie.js
+        response = (typeof response.responseText !== 'undefined') ? response : this;
+        reject(new AjaxError(method, url, data, headers, response.status, response.responseText));
+      },
+    });
+  });
+}
+
+
+function get (url, data, headers) {
+  data = toQuery(data);
+  // Don't request with '?' if there is no data
+  data = data ? '?' + data : '';
+  headers = headers || {};
+  return ajax('GET', url + data, '', headers);
+}
+
+
+function post (url, data, headers) {
+  const h = {
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
   };
+  if (headers) {
+    forEach(headers, (v, k) => {
+      h[k] = v;
+    });
+  }
+  return ajax('POST', url, data, h);
+}
 
 
-  return $;
-
-}));
-
-
-// ex: ts=2 sts=2 sw=2 et
-// sublime: tab_size 2; translate_tabs_to_spaces true; detect_indentation false; use_tab_stops true;
-// kate: space-indent on; indent-width 2;
+export {
+  get,
+  post,
+};

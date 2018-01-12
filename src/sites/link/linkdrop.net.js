@@ -1,7 +1,6 @@
 (function () {
-  'use strict';
 
-  $.register({
+  _.register({
     rule: {
       host: [
         /^(www\.)?linkdrop\.net$/,
@@ -10,13 +9,18 @@
         /^adurl\.id$/,
         /^goolink\.me$/,
         /^earningurl\.com$/,
+        /^cutwin\.com$/,
+        /^cutwi\.in$/,
+        /^(www\.)?ourl\.io$/,
       ],
     },
-    ready: function () {
-      $.removeNodes('iframe');
+    async ready () {
+      $.remove('iframe, [class$="Overlay"]');
+      $.block('[class$="Overlay"]', document.body);
 
-      var f = getForm();
+      const f = getForm();
       if (!f) {
+        _.info('no form');
         return;
       }
 
@@ -24,15 +28,24 @@
     },
   });
 
-
-  $.register({
+  _.register({
     rule: {
-      host: /^sflnk\.me$/,
+      host: [
+        /^sflnk\.me$/,
+        /^idsly\.com$/,
+        /^adbilty\.me$/,
+        /^oke\.io$/,
+      ],
     },
-    ready: function () {
-      $.removeNodes('iframe');
+    async ready () {
+      $.remove('iframe');
 
-      var f = getForm();
+      let f = $.$('#captchaShortlink');
+      if (f) {
+        // recaptcha
+        return;
+      }
+      f = getForm();
       if (!f) {
         f = $('#link-view');
         f.submit();
@@ -43,10 +56,54 @@
     },
   });
 
+  _.register({
+    rule: {
+      host: [
+        /^adlink\.guru$/,
+        /^clik\.pw$/,
+        /^coshurl\.co$/,
+        /^curs\.io$/,
+        /^cypt\.ga$/,
+        /^(filesbucks|tmearn|cut-urls)\.com$/,
+        /^elink\.link$/,
+        /^(payurl|urlst)\.me$/,
+        /^u2s\.io$/,
+        /^url\.ht$/,
+        /^urle\.co$/,
+        /^(hashe|trlink|adshort)\.in$/,
+        /^www\.worldhack\.net$/,
+        /^123link\.(io|co|press)$/,
+        /^pir\.im$/,
+        /^bol\.tl$/,
+        /^(tl|adfly)\.tc$/,
+        /^(adfu|linkhits)\.us$/,
+        /^short\.pastewma\.com$/,
+        /^l2s\.io$/,
+        /^linkfly\.gaosmedia\.com$/,
+        /^linclik\.com$/,
+        /^link-earn\.com$/,
+        /^zez\.io$/,
+        /^adbull\.me$/,
+        /^adshort\.im$/,
+        /^adshorte\.com$/,
+        /^weefy\.me$/,
+      ],
+    },
+    async ready () {
+      $.remove('iframe', '.BJPPopAdsOverlay');
+
+      const page = await firstStage();
+      const url = await secondStage(page);
+      // nuke for bol.tl, somehow it will interfere click event
+      $.nuke(url);
+      await $.openLink(url);
+    },
+  });
+
 
   function getForm () {
-    var jQuery = $.window.$;
-    var f = jQuery('form[action="/links/go"], form[action="/links/linkdropgo"]');
+    const jQuery = $.window.$;
+    const f = jQuery('#go-link, .go-link, form[action="/links/go"], form[action="/links/linkdropgo"]');
     if (f.length > 0) {
       return f;
     }
@@ -54,24 +111,65 @@
   }
 
 
+  // XXX threw away promise
   function sendRequest (f) {
-    var jQuery = $.window.$;
+    const jQuery = $.window.$;
     jQuery.ajax({
       dataType: 'json',
       type: 'POST',
       url: f.attr('action'),
       data: f.serialize(),
-      success: function (result, status, xhr) {
+      success: (result) => {
         if (result.url) {
           $.openLink(result.url);
         } else {
           _.warn(result.message);
         }
       },
-      error: function (xhr, status, error) {
+      error: (xhr, status, error) => {
         _.warn(xhr, status, error);
       },
     });
+  }
+
+
+  function firstStage () {
+    return new Promise((resolve) => {
+      const f = $.$('#link-view');
+      if (!f) {
+        resolve(document);
+        return;
+      }
+
+      const args = extractArgument(f);
+      const url = f.getAttribute('action');
+      const p = $.post(url, args).then((data) => {
+        return $.toDOM(data);
+      });
+      resolve(p);
+    });
+  }
+
+
+  async function secondStage (page) {
+    const f = $('#go-link', page);
+    const args = extractArgument(f);
+    const url = f.getAttribute('action');
+    let data = await $.post(url, args);
+    data = JSON.parse(data);
+    if (data && data.url) {
+      return data.url;
+    }
+    throw new _.AdsBypasserError('wrong data');
+  }
+
+
+  function extractArgument (form) {
+    const args = {};
+    _.forEach($.$$('input', form), (v) => {
+      args[v.name] = v.value;
+    });
+    return args;
   }
 
 })();

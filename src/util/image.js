@@ -1,155 +1,162 @@
-(function (context, factory) {
-  if (typeof module === 'object' && typeof module.exports === 'object') {
-    module.exports = function (context, GM) {
-      var _ = require('lodash');
-      var core = require('./core.js');
-      var dom = require('./dom.js');
-      var config = require('./config.js');
-      var link = require('./link.js');
-      var misc = require('./misc.js');
-      var modules = [dom, config, link, misc].map(function (v) {
-        return v.call(null, context, GM);
-      });
-      var $ = _.assign.apply(_, modules);
-      return factory(context, GM, core, $);
-    };
-  } else {
-    factory(context, {
-      getResourceText: GM_getResourceText,
-      addStyle: GM_addStyle,
-      getResourceURL: GM_getResourceURL,
-    }, context._, context.$);
-  }
-}(this, function (context, GM, _, $) {
-  'use strict';
-
-  var window = context.window;
-  var document = window.document;
+import {
+  openLink,
+} from 'util/link';
+import {
+  remove,
+} from 'util/dom';
+import {
+  warn,
+  info,
+} from 'util/logger';
+import {
+  removeAllTimer,
+} from 'util/misc';
+import {
+  GMAPI,
+} from 'util/platform';
 
 
-  $.openImage = function (imgSrc, options) {
-    options = options || {};
-    var replace = !!options.replace;
-    // will be false by default
-    var referer = !!options.referer;
+async function openImage (imgSrc, options) {
+  options = options || {};
+  const replace = !!options.replace;
+  // will be false by default
+  const referer = !!options.referer;
 
-    if (replace) {
-      replaceBody(imgSrc);
-      return;
-    }
-
-    if ($.config.redirectImage) {
-      $.openLink(imgSrc, {
-        referer: referer,
-      });
-    }
-  };
-
-  function enableScrolling () {
-    var o = document.compatMode === 'CSS1Compat' ? document.documentElement : document.body;
-    o.style.overflow = '';
-  };
-
-  function toggleShrinking () {
-    this.classList.toggle('adsbypasser-shrinked');
+  if (replace) {
+    await replaceBody(imgSrc);
+    return;
   }
 
-  function checkScaling () {
-    var nw = this.naturalWidth;
-    var nh = this.naturalHeight;
-    var cw = document.documentElement.clientWidth;
-    var ch = document.documentElement.clientHeight;
-    if ((nw > cw || nh > ch) && !this.classList.contains('adsbypasser-resizable')) {
-      this.classList.add('adsbypasser-resizable');
-      this.classList.add('adsbypasser-shrinked');
-
-      this.addEventListener('click', toggleShrinking);
-    } else {
-      this.removeEventListener('click', toggleShrinking);
-
-      this.classList.remove('adsbypasser-shrinked');
-      this.classList.remove('adsbypasser-resizable');
-    }
-  }
-
-  function scaleImage (i) {
-    var style = GM.getResourceText('scaleImage');
-    GM.addStyle(style);
-
-    if (i.naturalWidth && i.naturalHeight) {
-      checkScaling.call(i);
-    } else {
-      i.addEventListener('load', checkScaling);
-    }
-
-    var h;
-    window.addEventListener('resize', function () {
-      window.clearTimeout(h);
-      h = window.setTimeout(checkScaling.bind(i), 100);
+  const redirectImage = await GMAPI.getValue('redirect_image');
+  if (redirectImage) {
+    await openLink(imgSrc, {
+      referer: referer,
     });
   }
+}
 
-  function changeBackground () {
-    var bgImage = GM.getResourceURL('bgImage');
-    document.body.style.backgroundColor = '#222222';
-    document.body.style.backgroundImage = _.T('url(\'{0}\')')(bgImage);
+
+function enableScrolling () {
+  const o = document.compatMode === 'CSS1Compat' ? document.documentElement : document.body;
+  o.style.overflow = '';
+}
+
+
+function toggleShrinking () {
+  this.classList.toggle('adsbypasser-shrinked');
+}
+
+
+function checkScaling () {
+  const nw = this.naturalWidth;
+  const nh = this.naturalHeight;
+  const cw = document.documentElement.clientWidth;
+  const ch = document.documentElement.clientHeight;
+  if ((nw > cw || nh > ch) && !this.classList.contains('adsbypasser-resizable')) {
+    this.classList.add('adsbypasser-resizable');
+    this.classList.add('adsbypasser-shrinked');
+
+    this.addEventListener('click', toggleShrinking);
+  } else {
+    this.removeEventListener('click', toggleShrinking);
+
+    this.classList.remove('adsbypasser-shrinked');
+    this.classList.remove('adsbypasser-resizable');
+  }
+}
+
+
+async function scaleImage (i) {
+  const siURL = await GMAPI.getResourceUrl('scaleImage');
+  appendStyleURL(siURL);
+
+  if (i.naturalWidth && i.naturalHeight) {
+    checkScaling.call(i);
+  } else {
+    i.addEventListener('load', checkScaling);
   }
 
-  function alignCenter () {
-    var style = GM.getResourceText('alignCenter');
-    GM.addStyle(style);
+  let h = 0;
+  window.addEventListener('resize', () => {
+    window.clearTimeout(h);
+    h = window.setTimeout(checkScaling.bind(i), 100);
+  });
+}
+
+
+async function changeBackground () {
+  const bgImage = await GMAPI.getResourceUrl('bgImage');
+  document.body.style.backgroundColor = '#222222';
+  document.body.style.backgroundImage = `url('${bgImage}')`;
+}
+
+
+async function alignCenter () {
+  const acURL = await GMAPI.getResourceUrl('alignCenter');
+  appendStyleURL(acURL);
+}
+
+
+function injectStyle (d, i) {
+  remove('style, link[rel=stylesheet]');
+
+  d.id = 'adsbypasser-wrapper';
+  i.id = 'adsbypasser-image';
+}
+
+
+function appendStyleURL (url) {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = url;
+  document.head.appendChild(link);
+}
+
+
+async function replaceBody (imgSrc) {
+  const redirectImage = await GMAPI.getValue('redirect_image');
+  if (!redirectImage) {
+    return;
   }
 
-  function injectStyle (d, i) {
-    $.removeNodes('style, link[rel=stylesheet]');
-
-    d.id = 'adsbypasser-wrapper';
-    i.id = 'adsbypasser-image';
+  if (!imgSrc) {
+    warn('false url');
+    return;
   }
+  info(`replacing body with \`${imgSrc}\` ...`);
 
-  function replaceBody (imgSrc) {
-    if (!$.config.redirectImage) {
-      return;
-    }
+  // NOTE maybe nuke the whole page
+  removeAllTimer();
+  enableScrolling();
 
-    if (!imgSrc) {
-      _.warn('false url');
-      return;
-    }
-    _.info(_.T('replacing body with `{0}` ...')(imgSrc));
+  document.body = document.createElement('body');
 
-    $.removeAllTimer();
-    enableScrolling();
+  const d = document.createElement('div');
+  document.body.appendChild(d);
 
-    document.body = document.createElement('body');
+  const i = document.createElement('img');
+  i.src = imgSrc;
+  d.appendChild(i);
 
-    var d = document.createElement('div');
-    document.body.appendChild(d);
-
-    var i = document.createElement('img');
-    i.src = imgSrc;
-    d.appendChild(i);
-
-    if ($.config.alignCenter || $.config.scaleImage) {
-      injectStyle(d, i);
-    }
-    if ($.config.alignCenter) {
-      alignCenter();
-    }
-    if ($.config.changeBackground) {
-      changeBackground();
-    }
-    if ($.config.scaleImage) {
-      scaleImage(i);
-    }
-  };
+  const ac = await GMAPI.getValue('align_center');
+  const si = await GMAPI.getValue('scale_image');
+  if (ac || si) {
+    injectStyle(d, i);
+  }
+  if (ac) {
+    await alignCenter();
+  }
+  const cb = await GMAPI.getValue('change_background');
+  if (cb) {
+    await changeBackground();
+  }
+  if (si) {
+    await scaleImage(i);
+  }
+}
 
 
-  return $;
-
-}));
-
-
-// ex: ts=2 sts=2 sw=2 et
-// sublime: tab_size 2; translate_tabs_to_spaces true; detect_indentation false; use_tab_stops true;
-// kate: space-indent on; indent-width 2;
+export {
+  openImage,
+};

@@ -1,6 +1,6 @@
 // all blog type belong here?
 
-$.register({
+_.register({
   rule: [
     {
       host: [
@@ -18,7 +18,7 @@ $.register({
     {
       host: /^(www\.)?safelinkair\.com$/,
       path: /^\/code$/,
-      query: /(?:\?|&)link=([a-zA-Z0-9\/=]+)(?:$|&)/,
+      query: /(?:\?|&)link=([a-zA-Z0-9/=]+)(?:$|&)/,
     },
     {
       host: [
@@ -27,7 +27,7 @@ $.register({
         /^kombatch\.amankan\.link$/,
       ],
       path: /^\/p\/(go|healty-lie)\.html$/,
-      query: /^\?url=([a-zA-Z0-9\/=]+)$/,
+      query: /^\?url=([a-zA-Z0-9/=]+)$/,
     },
     {
       host: [
@@ -42,51 +42,55 @@ $.register({
         /^ww2\.awsubs\.co$/,
         /^autorp\.us$/
       ],
-      query: /^\?d=([a-zA-Z0-9\/=]+)$/,
+      query: /^\?d=([a-zA-Z0-9/=]+)$/,
     },
     {
       host: /^www\.anisubsia\.tk$/,
       path: /^\/p\/link\.html$/,
-      query: /^\?url=([a-zA-Z0-9\/=]+)$/,
+      query: /^\?url=([a-zA-Z0-9/=]+)$/,
     },
     {
       host: [
         /^www\.insurance1\.tech$/,
         /^www\.freeanimeonline\.xyz$/,
       ],
-      query: /^\?site=([a-zA-Z0-9\/=]+)/,
+      query: /^\?site=([a-zA-Z0-9/=]+)/,
     },
     {
       host: /^i\.gtaind\.com$/,
-      query: /^\?([a-zA-Z0-9\/=]+)$/,
+      query: /^\?([a-zA-Z0-9/=]+)$/,
     },
     // blogspot, kind of brutal
     {
       host: /\.blogspot\.com?/,
       query: [
         // id must be the first captured group
-        /^\?url=([a-zA-Z0-9\/=]+)$/,
-        /^\?id=([a-zA-Z0-9\/=]+)$/,
+        /^\?url=([a-zA-Z0-9/=]+)$/,
+        /^\?id=([a-zA-Z0-9/=]+)$/,
       ],
     },
     {
       host: /^sehatlega\.com$/,
-      query: /^\?lanjut=([a-zA-Z0-9\/=]+)$/,
+      query: /^\?lanjut=([a-zA-Z0-9/=]+)$/,
     },
     {
       host: /^shorten\.id$/,
       // note the trailing `=`
-      query: /^\?url=([a-zA-Z0-9\/=]+)=$/,
+      query: /^\?url=([a-zA-Z0-9/=]+)=$/,
+    },
+    {
+      host: /^www\.compartiendofull\.net$/,
+      path: /^\/go2/,
+      query: /^\?p=([a-zA-Z0-9/=]+)$/,
     },
   ],
-  start: function (m) {
-    'use strict';
-    var rawLink = atob(m.query[1]);
-    $.openLink(rawLink);
+  async start (m) {
+    const rawLink = atob(m.query[1]);
+    await $.openLink(rawLink);
   },
 });
 
-$.register({
+_.register({
   rule: [
     {
       host: [
@@ -121,11 +125,9 @@ $.register({
       query: /go=([\w\\]+=*)/,
     },
   ],
-  start: function (m) {
-    'use strict';
-
-    var l = atob(m.query[1]);
-    var table = {
+  async start (m) {
+    let l = atob(m.query[1]);
+    const table = {
       '!': 'a',
       ')': 'e',
       '_': 'i',
@@ -135,71 +137,95 @@ $.register({
     l = l.replace(/[!)_(*]/g, function (m) {
       return table[m];
     });
-    $.openLink(l);
+    await $.openLink(l);
   },
 });
 
-$.register({
+_.register({
   rule: {
     host: /^(www\.)?safelinkreview\.com$/,
-    path: /^\/\w+\/cost\/([\w\.]+)\/?$/,
+    path: /^\/\w+\/cost\/([\w.]+)\/?$/,
   },
-  start: function (m) {
-    'use strict';
-
-    var l = 'http://' + m.path[1];
-    $.openLink(l);
+  async start (m) {
+    const l = 'http://' + m.path[1];
+    await $.openLink(l);
   },
 });
 
-$.register({
-  rule: {
-    host: [
-      /^(designinghomey|ani-share|sinopsisfilmku)\.com$/,
-      /^motonews\.club$/,
-      /^(autofans|landscapenature)\.pw$/,
-      /^(sidespace|erogedownload)\.net$/,
-    ],
-    query: /get=([^&]+)/,
-  },
-  ready: function (m) {
-    'use strict';
-
-    var s = $.searchScripts(/var a='([^']+)'/);
+_.register({
+  rule: [
+    {
+      host: [
+        /^(designinghomey|ani-share|sinopsisfilmku|autolinkach)\.com$/,
+        /^motonews\.club$/,
+        /^(autofans|landscapenature)\.pw$/,
+        /^(sidespace|erogedownload)\.net$/,
+      ],
+      query: /get=([^&]+)/,
+    },
+    {
+      host: /^sipkur\.us$/,
+      path: /\.html$/,
+    },
+  ],
+  async ready (m) {
+    let s = $.searchFromScripts(/(const|var) a='([^']+)'/);
     if (s) {
-      $.openLink(s[1]);
+      await $.openLink(s[2]);
       return;
     }
     s = atob(m.query[1]);
-    $.openLink(s);
+    await $.openLink(s);
   },
 });
 
-$.register({
+_.register({
   rule: {
     host: /^kombatch\.loncat\.pw$/,
   },
-  ready: function () {
-    'use strict';
-
-    var s = $.searchScripts(/\.open\("([^"]+)",/);
+  async ready () {
+    let s = $.searchFromScripts(/\.open\("([^"]+)",/);
     s = s[1].match(/go=([^&]+)/);
     s = atob(s[1]);
-    $.openLink(s);
+    await $.openLink(s);
   },
 });
 
-$.register({
+_.register({
   rule: {
     host: [
       /^ww[23]\.picnictrans\.com$/,
       /^short\.awsubs\.(co|me)$/,
     ],
   },
-  ready: function () {
-    'use strict';
+  async ready () {
+    const a = $('div.kiri > center > a');
+    await $.openLink(a.href);
+  },
+});
 
-    var a = $('div.kiri > center > a');
-    $.openLink(a.href);
+_.register({
+  rule: {
+    host: /^susutinv2\.com$/,
+  },
+  async ready () {
+    const s = $.searchFromScripts(/="([^"]+)",/);
+    if (!s) {
+      _.warn('site changed');
+      return;
+    }
+    await $.openLink(s[1]);
+  },
+});
+
+_.register({
+  rule: {
+    host: /^www\.njiir\.com$/,
+  },
+  async ready () {
+    let a = $('div.download-link > a');
+    a = a.href.match(/r=(.*)$/);
+    a = atob(a[1]);
+    await $.openLink(a);
   },
 });

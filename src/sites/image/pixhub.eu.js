@@ -1,12 +1,10 @@
-$.register({
+_.register({
   rule: {
     host: /^pixhub\.eu$/,
   },
-  ready: function () {
-    'use strict';
-
-    $.removeNodes('iframe, .adultpage, #FFN_Banner_Holder');
-    var i = $('.image-show img');
-    $.openImage(i.src);
+  async ready () {
+    $.remove('iframe, .adultpage, #FFN_Banner_Holder');
+    const i = $('.image-show img');
+    await $.openImage(i.src);
   },
 });

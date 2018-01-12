@@ -1,3 +1,147 @@
+## v6.6.0
+
+* fixed
+    * clictune.com
+    * adyou.me
+    * imgrock.info
+    * imgdew.com
+* added
+    * ourl.io
+    * cutwin.com
+    * cutwi.in
+    * adyou.co
+    * imgsky.net
+    * picker-click.ru
+    * imgoutlet.pw
+* removed
+    * imgoutlet.co
+    * link.tl
+
+## v6.5.0
+
+* fixed
+    * linkdrop.net
+* added
+    * adbilty.me
+    * oke.io
+    * susutinv2.com
+    * njiir.com
+* removed
+    * zytpirwai.net
+
+## v6.4.1
+
+* fixed
+    * lite edition bug
+
+## v6.4.0
+
+* fixed
+    * ally.sh
+    * idsly.com
+* added
+    * GreaseMonkey v4 support
+    * oload.stream
+    * 123link.co
+    * 123link.press
+    * adshort.im
+    * p0xpicmoney.ru
+    * compartiendofull.net
+    * l2s.io
+    * curs.io
+    * clik.pw
+    * weefy.me
+    * coshurl.co
+* removed
+    * adshort.co
+
+## v6.3.0
+
+* fixed
+    * imgrock.info
+    * imagecrest.com
+    * clictune.com
+* added
+    * imghost.top
+    * croea.com
+    * xxx.pornscreen.xyz
+    * imgpart.com
+    * shink.me
+    * oload.info
+    * 123link.io
+* removed
+    * 123link.top
+
+## v6.2.1
+
+* fixed
+    * mirrorcreator.com
+    * configuration page
+
+## v6.2.0
+
+* fixed
+    * sipkur.us
+* added
+    * xxxwebdlxxx.org
+    * u2s.io
+    * imagespicy.site
+    * linclik.com
+    * link-earn.com
+    * autolinkach.com
+    * zez.io
+    * adbull.me
+    * adshort.co
+    * adshorte.com
+
+## v6.1.4
+
+* fixed
+    * legacy browser support
+
+## v6.1.3
+
+* fixed
+    * adf.ly
+
+## v6.1.2
+
+* fixed
+    * bc.vc
+    * jzrputtbut.net
+
+## v6.1.1
+
+* fixed
+    * configuration page
+    * 55888.eu
+    * ouo.io
+    * spaste.com
+
+## v6.1.0
+
+* changed
+    * Trying to fix compatibility to Violentmonkey
+* fixed
+    * ouo.io
+    * imgdrive.net
+    * fas.li
+    * adf.ly
+    * prntscr.com
+    * short.am
+    * urlcash.net
+    * idsly.com
+* added
+    * imgrock.info
+* removed
+    * imgrock.net
+
+## v6.0.0
+
+* changed
+    * rewrite to ES7
+    * rewrite build system
+
 ## v5.73.0
 
 * fixed
