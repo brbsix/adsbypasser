@@ -6,15 +6,19 @@ MAKEFLAGS += --warn-undefined-variables
 LITE_RELEASE ?= true
 
 ifeq ($(LITE_RELEASE), true)
-US_VER := lite
+US_FEATURE := lite
 else
-US_VER :=
+US_FEATURE := full
 endif
 
-DEST_DIRECTORY := dest
 US_NAME := adsbypasser
-US_EXT := .user.js
-US_PATH = $(DEST_DIRECTORY)/$(US_NAME)$(US_VER)$(US_EXT)
+US_ECMA := es7
+US_EXT := user.js
+US_PATH = build/$(US_NAME).$(US_FEATURE).$(US_ECMA).$(US_EXT)
+
+.PHONY: clean
+clean:
+	npm run clean
 
 .PHONY: pull
 pull:
@@ -25,10 +29,10 @@ node_modules: package.json pull
 	npm prune
 	npm install
 
-dest: node_modules src
+build: node_modules src
 	npm run build
 
-$(US_PATH): dest
+$(US_PATH): build
 
 .PHONY: clipboard
 clipboard: $(US_PATH)
@@ -38,5 +42,5 @@ clipboard: $(US_PATH)
 ifdef DISPLAY
 all: clipboard
 else
-all: dest
+all: build
 endif
