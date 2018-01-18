@@ -20,6 +20,10 @@ US_PATH = build/$(US_NAME).$(US_FEATURE).$(US_ECMA).$(US_EXT)
 clean: node_modules
 	npm run clean
 
+.PHONY: distclean
+distclean:
+	rm -rf build/ node_modules/ package-lock.json
+
 .PHONY: pull
 pull:
 	git pull upstream master
