@@ -17,7 +17,7 @@ US_EXT := user.js
 US_PATH = build/$(US_NAME).$(US_FEATURE).$(US_ECMA).$(US_EXT)
 
 .PHONY: clean
-clean:
+clean: node_modules
 	npm run clean
 
 .PHONY: pull
