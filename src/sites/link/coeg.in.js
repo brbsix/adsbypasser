@@ -5,13 +5,14 @@
       host: [
         /^link\.animagz\.org$/,
         /^(coeg|disingkat|gunting)\.in$/,
-        /^www\.telondasmu\.com$/,
+        /^www\.(telondasmu|siotong|siherp)\.com$/,
+        /^www\.greget\.space$/,
       ],
       path: /^\/\w+$/,
     },
     async ready (m) {
       const mapper = hostMapper(m.host[0]);
-      const b64 = mapper().match(/\?r=(\w+={0,2}?)/);
+      const b64 = mapper().match(/\?r=([\w/]+={0,2})/);
 
       await $.openLink(atob(b64[1]));
     },
@@ -50,6 +51,9 @@
       };
     case 'coeg.in':
     case 'www.telondasmu.com':
+    case 'www.siotong.com':
+    case 'www.siherp.com':
+    case 'www.greget.space':
       return () => {
         const a = $('.download-link a');
         return a.href;

@@ -76,14 +76,14 @@
   _.register({
     rule: {
       host: [
-        /^(1tk|hit|adbla|tl7|mylink)\.us$/,
+        /^(1tk|hit|adbla|tl7)\.us$/,
+        /^mylink\.(us|zone)$/,
         /^gx\.si$/,
         /^adwat\.ch$/,
         /^(fly2url|urlwiz|xafox)\.com$/,
         /^(zpoz|ultry)\.net$/,
         /^(wwy|myam)\.me$/,
         /^(ssl|srk)\.gs$/,
-        /^shortit\.in$/,
         /^www\.adjet\.eu$/,
         /^cun\.bz$/,
         /^miniurl\.tk$/,

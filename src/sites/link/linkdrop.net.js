@@ -3,15 +3,20 @@
   _.register({
     rule: {
       host: [
-        /^(www\.)?linkdrop\.net$/,
         /^dmus\.in$/,
         /^ulshare\.net$/,
         /^adurl\.id$/,
         /^goolink\.me$/,
         /^earningurl\.com$/,
-        /^cutwin\.com$/,
-        /^cutwi\.in$/,
-        /^(www\.)?ourl\.io$/,
+        /^earn-guide\.com$/,
+        /^(cutwin|cut-earn)\.com$/,
+        /^(cutwi|cut-w|cutl)\.in$/,
+        /^(www\.)?jurl\.io$/,
+        /^mitly\.us$/,
+        /^adpop\.me$/,
+        /^wi\.cr$/,
+        /^tui\.click$/,
+        /^megaurl\.in$/,
       ],
     },
     async ready () {
@@ -35,16 +40,42 @@
         /^idsly\.com$/,
         /^adbilty\.me$/,
         /^oke\.io$/,
+        /^linkrex\.net$/,
+        /^safelinku\.net$/,
+        /^3bst\.co$/,
+        /^3rab(short|cut)\.com$/,
+        /^shink\.xyz$/,
+        /^mlink\.club$/,
+        /^zlshorte\.net$/,
+        /^(igram|gram)\.im$/,
+        /^(trlink|wolink|tocdo)\.in$/,
+        /^dz4link\.com$/,
+        /^short2win\.com$/,
+        /^vnurl\.net$/,
+        /^clk\.press$/,
+        /^short\.pe$/,
+        /^urlcloud\.us$/,
+        /^(www\.)?ourl\.io$/,
+        /^(www\.)?linkdrop\.net$/,
+        /^(123link|clik)\.pw$/,
+        /^(vy\.)?adsvy\.com$/,
+        /^cut4links\.com$/,
+        /^tmearn\.com$/,
       ],
     },
     async ready () {
-      $.remove('iframe');
-
       let f = $.$('#captchaShortlink');
       if (f) {
+        $.remove('[class$="Overlay"]');
+        $.block('[class$="Overlay"]', document.body);
+
         // recaptcha
+        _.info('recaptcha detected, stop');
         return;
       }
+
+      $.remove('iframe');
+
       f = getForm();
       if (!f) {
         f = $('#link-view');
@@ -52,7 +83,10 @@
         return;
       }
 
-      sendRequest(f);
+      while (true) {
+        await _.wait(2000);
+        sendRequest(f);
+      }
     },
   });
 
@@ -60,33 +94,51 @@
     rule: {
       host: [
         /^adlink\.guru$/,
-        /^clik\.pw$/,
-        /^coshurl\.co$/,
-        /^curs\.io$/,
+        /^(psl|twik)\.pw$/,
+        /^coshink\.co$/,
+        /^(curs|cuon)\.io$/,
+        /^shark\.vn$/,
         /^cypt\.ga$/,
-        /^(filesbucks|tmearn|cut-urls)\.com$/,
-        /^elink\.link$/,
+        /^(filesbucks|cut-urls|link-earn|shrinkearn)\.com$/,
+        /^adslink\.pw$/,
+        /^dzurl\.ml$/,
+        /^(elink|petty)\.link$/,
         /^(payurl|urlst)\.me$/,
         /^u2s\.io$/,
+        /^shortad\.cf$/,
+        /^link4\.me$/,
         /^url\.ht$/,
         /^urle\.co$/,
-        /^(hashe|trlink|adshort)\.in$/,
+        /^hashe\.in$/,
         /^www\.worldhack\.net$/,
         /^123link\.(io|co|press)$/,
         /^pir\.im$/,
-        /^bol\.tl$/,
-        /^(tl|adfly)\.tc$/,
+        /^(www\.)?(pnd|bol)\.tl$/,
+        /^(tl|adfly|git)\.tc$/,
         /^(adfu|linkhits)\.us$/,
         /^short\.pastewma\.com$/,
         /^l2s\.io$/,
+        /^adbilty\.in$/,
+        /^gg-l\.xyz$/,
         /^linkfly\.gaosmedia\.com$/,
         /^linclik\.com$/,
-        /^link-earn\.com$/,
-        /^zez\.io$/,
+        /^zeiz\.me$/,
         /^adbull\.me$/,
-        /^adshort\.im$/,
-        /^adshorte\.com$/,
+        /^adshort\.co$/,
+        /^(adshorte|adsrt)\.com$/,
         /^weefy\.me$/,
+        /^bit-url\.com$/,
+        /^premiumzen\.com$/,
+        /^cut4link\.com$/,
+        /^coinlink\.co$/,
+        /^kokemoon\.com$/,
+        /^(icutit|cutearn|earnbig|shortit)\.ca$/,
+        /^(www\.)?viralukk\.com$/,
+        /^shrt10\.com$/,
+        /^mikymoons\.com$/,
+        /^spamlink\.org$/,
+        /^top9space\.com$/,
+        /^royurls\.bid$/,
       ],
     },
     async ready () {

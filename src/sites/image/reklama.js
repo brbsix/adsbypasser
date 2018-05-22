@@ -63,6 +63,7 @@
           /^ipicture\.su$/,
           /^acidimg\.cc$/,
           /^s\.imghost\.top$/,
+          /^pic\.hotimg\.site$/,
         ],
         path: /^\/img-.*\.html/,
       },
@@ -85,10 +86,6 @@
       {
         host: /^imgbb\.net$/,
         path: /^\/.-.+$/,
-      },
-      {
-        host: /^cdn\.javtotal\.com$/,
-        path: /^\/img\/.+$/,
       },
       {
         host: /^imgtor\.pw$/,
@@ -140,8 +137,7 @@
   _.register({
     rule: {
       host: [
-        /^(www\.)?img(adult|wallet|taxi)\.com$/,
-        /^(www\.)?imgdrive\.net$/,
+        /^(www\.)?imgfresh\.info$/,
       ],
       path: /^\/img-.*\.html$/,
     },
@@ -248,6 +244,17 @@
   });
 
   _.register({
+    rule: {
+      host: /^imgprime\.com$/,
+      path: /^\/imga-u\/(.+)\.jpeg\.html/,
+    },
+    async ready () {
+      const path = window.location.href.replace('/imga-u', '/u').replace('.html', '');
+      await $.openLink(path);
+    },
+  });
+
+  _.register({
     rule: [
       {
         host: /^imagerar\.com$/,
@@ -259,7 +266,7 @@
       },
       {
         host: /^imgprime\.com$/,
-        path: /^\/img3-.*\.html$/,
+        path: /^\/img.*\.html$/,
       },
     ],
     async ready () {
@@ -270,10 +277,28 @@
 
   _.register({
     rule: {
-      host: /^img\.yt$/,
-      path: /^\/img-.*\.html/,
+      host: /^imx\.to$/,
+      path: [
+        /^\/img-.*\.html/,
+        /^\/i\/.*/,
+      ],
     },
     ready: _.partial(action, '#continuebutton, #continuetoimage input[type="submit"]', 'img[class^=centred]'),
+  });
+
+  _.register({
+    rule: {
+      host: [
+        /^(www\.)?imgdrive\.net$/,
+        /^(www\.)?img(taxi|wallet|adult)\.com$/,
+      ],
+      path: /^\/img-.*\.html$/,
+    },
+    async ready () {
+      let m = $('meta[property="og:image"]');
+      m = m.content.replace('small', 'big');
+      await $.openImage(m);
+    },
   });
 
   async function action (firstSelector, secondSelector) {
