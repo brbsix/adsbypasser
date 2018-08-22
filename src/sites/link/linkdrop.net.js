@@ -3,216 +3,339 @@
   _.register({
     rule: {
       host: [
-        /^dmus\.in$/,
         /^ulshare\.net$/,
         /^adurl\.id$/,
-        /^goolink\.me$/,
-        /^earningurl\.com$/,
-        /^earn-guide\.com$/,
-        /^(cutwin|cut-earn)\.com$/,
-        /^(cutwi|cut-w|cutl)\.in$/,
+        /^(cutwin|earn-guide)\.com$/,
+        /^(cutwi|cut-w|cutl|dmus)\.in$/,
         /^(www\.)?jurl\.io$/,
         /^mitly\.us$/,
-        /^adpop\.me$/,
-        /^wi\.cr$/,
         /^tui\.click$/,
-        /^megaurl\.in$/,
+        /^met\.bz$/,
       ],
     },
     async ready () {
-      $.remove('iframe, [class$="Overlay"]');
-      $.block('[class$="Overlay"]', document.body);
-
-      const f = getForm();
-      if (!f) {
-        _.info('no form');
-        return;
-      }
-
-      sendRequest(f);
+      const handler = new NoRecaptchaHandler();
+      await handler.call();
     },
   });
 
   _.register({
     rule: {
       host: [
-        /^sflnk\.me$/,
-        /^idsly\.com$/,
-        /^adbilty\.me$/,
-        /^oke\.io$/,
-        /^linkrex\.net$/,
-        /^safelinku\.net$/,
-        /^3bst\.co$/,
-        /^3rab(short|cut)\.com$/,
-        /^shink\.xyz$/,
+        // com
+        /^(dz4link|gocitlink|3rabcut|short2win)\.com$/,
+        /^(tmearn|payshorturl|urltips|shrinkearn|itiad|cutsouf)\.com$/,
+        /^(earn-url|bit-url|cut-win|link-zero|cut-earn)\.com$/,
+        /^(vy\.)?adsvy\.com$/,
+        /^(linkexa|admew|shrtfly|kuylink|cut4links)\.com$/,
+        // net
+        /^(safelinku|tinylinks|licklink|linkrex|zlshorte)\.net$/,
+        /^(vnurl|vinaurl|foxurl|short2win|cashat)\.net$/,
+        // else
+        /^(trlink|wolink|tocdo|megaurl)\.in$/,
+        /^(petty|skips|tr)\.link$/,
+        /^idsly\.(com|bid)$/,
+        /^(adbilty|adpop|payskip|wicr|ujv)\.me$/,
+        /^wi\.cr$/,
+        /^(oke|cuon|linktor|flylink)\.io$/,
+        /^(3bst|coinlink|itiurl|coshink)\.co$/,
+        /^(shink|shrten|gg-l)\.xyz$/,
         /^mlink\.club$/,
-        /^zlshorte\.net$/,
         /^(igram|gram)\.im$/,
-        /^(trlink|wolink|tocdo)\.in$/,
-        /^dz4link\.com$/,
-        /^short2win\.com$/,
-        /^vnurl\.net$/,
-        /^clk\.press$/,
+        /^clk\.(press|sh)$/,
         /^short\.pe$/,
         /^urlcloud\.us$/,
-        /^(www\.)?ourl\.io$/,
-        /^(www\.)?linkdrop\.net$/,
-        /^(123link|clik)\.pw$/,
-        /^(vy\.)?adsvy\.com$/,
-        /^cut4links\.com$/,
-        /^tmearn\.com$/,
+        /^(123link|clik|tokenfly|getlink)\.pw$/,
+        /^(icutit|earnbig|cutearn)\.ca$/,
+        /^koylinks\.win$/,
+        /^lopte\.pro$/,
+        /^(www\.)?pnd\.tl$/,
+        /^(tny|tiny)\.ec$/,
+        /^tl\.tc$/,
+        /^lyon\.kim$/,
+        /^linkvip\.tk$/,
       ],
     },
     async ready () {
-      let f = $.$('#captchaShortlink');
-      if (f) {
-        $.remove('[class$="Overlay"]');
-        $.block('[class$="Overlay"]', document.body);
+      const handler = new RecaptchaHandler();
+      await handler.call();
+    },
+  });
 
-        // recaptcha
-        _.info('recaptcha detected, stop');
-        return;
-      }
+  _.register({
+    rule: {
+      host: /^(www\.)?ourl\.io$/,
+    },
+    async ready () {
+      const handler = new OURLHandler();
+      await handler.call();
+    },
+  });
 
-      $.remove('iframe');
-
-      f = getForm();
-      if (!f) {
-        f = $('#link-view');
-        f.submit();
-        return;
-      }
-
-      while (true) {
-        await _.wait(2000);
-        sendRequest(f);
-      }
+  _.register({
+    rule: {
+      host: /^(www\.)?linkdrop\.net$/,
+    },
+    async ready () {
+      const handler = new LinkDropHandler();
+      await handler.call();
     },
   });
 
   _.register({
     rule: {
       host: [
-        /^adlink\.guru$/,
-        /^(psl|twik)\.pw$/,
-        /^coshink\.co$/,
-        /^(curs|cuon)\.io$/,
-        /^shark\.vn$/,
-        /^cypt\.ga$/,
-        /^(filesbucks|cut-urls|link-earn|shrinkearn)\.com$/,
-        /^adslink\.pw$/,
-        /^dzurl\.ml$/,
-        /^(elink|petty)\.link$/,
-        /^(payurl|urlst)\.me$/,
-        /^u2s\.io$/,
-        /^shortad\.cf$/,
-        /^link4\.me$/,
-        /^url\.ht$/,
-        /^urle\.co$/,
-        /^hashe\.in$/,
-        /^www\.worldhack\.net$/,
-        /^123link\.(io|co|press)$/,
-        /^pir\.im$/,
-        /^(www\.)?(pnd|bol)\.tl$/,
-        /^(tl|adfly|git)\.tc$/,
-        /^(adfu|linkhits)\.us$/,
+        // com
+        /^(cut-urls|linclik|premiumzen|shrt10|by6dk|mikymoons|man2pro)\.com$/,
+        /^(mykinggo|win4cut)\.com$/,
         /^short\.pastewma\.com$/,
-        /^l2s\.io$/,
-        /^adbilty\.in$/,
-        /^gg-l\.xyz$/,
         /^linkfly\.gaosmedia\.com$/,
-        /^linclik\.com$/,
-        /^zeiz\.me$/,
-        /^adbull\.me$/,
-        /^adshort\.co$/,
         /^(adshorte|adsrt)\.com$/,
-        /^weefy\.me$/,
-        /^bit-url\.com$/,
-        /^premiumzen\.com$/,
-        /^cut4link\.com$/,
-        /^coinlink\.co$/,
-        /^kokemoon\.com$/,
-        /^(icutit|cutearn|earnbig|shortit)\.ca$/,
         /^(www\.)?viralukk\.com$/,
-        /^shrt10\.com$/,
-        /^mikymoons\.com$/,
+        /^(www\.)?niagoshort\.com$/,
+        /^(oturl|loadurl)\.com$/,
+        /^(cut4link|raolink)\.com$/,
+        // net
+        /^www\.worldhack\.net$/,
+        /^(eklink|vivads)\.net$/,
+        // else
+        /^(urle|adshort)\.co$/,
+        /^(weefy|adbull|zeiz|link4|adcoin)\.me$/,
+        /^(adbilty|taive)\.in$/,
+        /^(psl|twik|adslink)\.pw$/,
+        /^(curs|crus|4cut|u2s|l2s)\.io$/,
+        /^dzurl\.ml$/,
+        /^petty\.link$/,
+        /^shortad\.cf$/,
+        /^123link\.(io|co|press|pro)$/,
+        /^git\.tc$/,
+        /^adfu\.us$/,
+        /^shortit\.ca$/,
         /^spamlink\.org$/,
-        /^top9space\.com$/,
         /^royurls\.bid$/,
+        /^za\.gl$/,
       ],
     },
     async ready () {
-      $.remove('iframe', '.BJPPopAdsOverlay');
-
-      const page = await firstStage();
-      const url = await secondStage(page);
-      // nuke for bol.tl, somehow it will interfere click event
-      $.nuke(url);
-      await $.openLink(url);
+      const handler = new StagedHandler();
+      await handler.call();
     },
   });
 
 
-  function getForm () {
-    const jQuery = $.window.$;
-    const f = jQuery('#go-link, .go-link, form[action="/links/go"], form[action="/links/linkdropgo"]');
-    if (f.length > 0) {
-      return f;
+  class AbstractHandler {
+
+    constructor () {
+      this._overlaySelector = [
+        '[class$="Overlay"]',
+        '#__random_class_name__',
+        '#headlineatas',
+      ].join(', ');
+
+      // TODO extract to paramater
+      this._formSelector = [
+        '#go-link',
+        '.go-link',
+        'form[action="/links/go"]',
+        'form[action="/links/linkdropgo"]',
+      ].join(', ');
     }
-    return null;
+
+    removeOverlay () {
+      $.remove(this._overlaySelector);
+      $.block(this._overlaySelector, document.body);
+    }
+
+    removeFrame () {
+      $.remove('iframe');
+    }
+
+    async call () {
+      const ok = this.prepare();
+      if (!ok) {
+        return;
+      }
+
+      const mw = await this.getMiddleware();
+      if (!mw) {
+        this.withoutMiddleware();
+        return;
+      }
+
+      const url = await this.getURL(mw);
+      await $.openLink(url);
+    }
+
   }
 
 
-  // XXX threw away promise
-  function sendRequest (f) {
-    const jQuery = $.window.$;
-    jQuery.ajax({
-      dataType: 'json',
-      type: 'POST',
-      url: f.attr('action'),
-      data: f.serialize(),
-      success: (result) => {
-        if (result.url) {
-          $.openLink(result.url);
-        } else {
-          _.warn(result.message);
+  class NoRecaptchaHandler extends AbstractHandler {
+
+    constructor () {
+      super();
+    }
+
+    prepare () {
+      this.removeFrame();
+      this.removeOverlay();
+      return true;
+    }
+
+    async getMiddleware () {
+      return await getJQueryForm(this._formSelector);
+    }
+
+    withoutMiddleware () {
+      _.info('no form');
+    }
+
+    async getURL (jForm) {
+      return await getURLFromJQueryForm(jForm);
+    }
+
+  }
+
+
+  class RecaptchaHandler extends AbstractHandler {
+
+    constructor () {
+      super();
+    }
+
+    prepare () {
+      this.removeOverlay();
+
+      const f = $.$('#captchaShortlink');
+      if (!f) {
+        return true;
+      }
+      _.info('recaptcha detected, stop');
+
+      // press the button after recaptcha
+      _.info('trying to listen submit button');
+      const b = $.$('#invisibleCaptchaShortlink');
+      if (!b) {
+        return false;
+      }
+
+      const o = new MutationObserver(() => {
+        if (!b.disabled) {
+          b.click();
         }
-      },
-      error: (xhr, status, error) => {
-        _.warn(xhr, status, error);
-      },
-    });
+      });
+      o.observe(b, {
+        attributes: true,
+      });
+
+      return false;
+    }
+
+    async getMiddleware () {
+      return await getJQueryForm(this._formSelector);
+    }
+
+    withoutMiddleware () {
+      // TODO This line was added for sflnk.me, but the domain is gone.
+      // Need to confirm if this is still work for the rest sites.
+      const f = $('#link-view');
+      f.submit();
+    }
+
+    async getURL (jForm) {
+      while (true) {
+        await _.wait(1000);
+        try {
+          const url = await getURLFromJQueryForm(jForm);
+          if (url) {
+            return url;
+          }
+        } catch (e) {
+          _.warn(e);
+        }
+      }
+    }
+
   }
 
 
-  function firstStage () {
-    return new Promise((resolve) => {
+  class OURLHandler extends RecaptchaHandler {
+
+    constructor () {
+      super();
+    }
+
+    async getMiddleware () {
+      return {
+        verify: await getJQueryForm('#get-link'),
+        go: await getJQueryForm(this._formSelector),
+      };
+    }
+
+    async getURL (jFormObject) {
+      await getURLFromJQueryForm(jFormObject.verify);
+      return await getURLFromJQueryForm(jFormObject.go);
+    }
+
+  }
+
+
+  class LinkDropHandler extends RecaptchaHandler {
+
+    constructor () {
+      super();
+    }
+
+    async getMiddleware () {
+      return await getJQueryForm('#mylink');
+    }
+
+  }
+
+
+  class StagedHandler extends AbstractHandler {
+
+    constructor () {
+      super();
+    }
+
+    prepare () {
+      this.removeFrame();
+      this.removeOverlay();
+      return true;
+    }
+
+    async getMiddleware () {
       const f = $.$('#link-view');
       if (!f) {
-        resolve(document);
-        return;
+        return document;
       }
 
       const args = extractArgument(f);
       const url = f.getAttribute('action');
-      const p = $.post(url, args).then((data) => {
-        return $.toDOM(data);
-      });
-      resolve(p);
-    });
-  }
-
-
-  async function secondStage (page) {
-    const f = $('#go-link', page);
-    const args = extractArgument(f);
-    const url = f.getAttribute('action');
-    let data = await $.post(url, args);
-    data = JSON.parse(data);
-    if (data && data.url) {
-      return data.url;
+      let page = await $.post(url, args);
+      page = $.toDOM(page);
+      return page;
     }
-    throw new _.AdsBypasserError('wrong data');
+
+    withoutMiddleware () {
+      _.info('no page');
+    }
+
+    async getURL (page) {
+      const f = $('#go-link', page);
+      const args = extractArgument(f);
+      const url = f.getAttribute('action');
+      let data = await $.post(url, args);
+      data = JSON.parse(data);
+      if (data && data.url) {
+        // nuke for bol.tl, somehow it will interfere click event
+        $.nuke(data.url);
+
+        return data.url;
+      }
+      throw new _.AdsBypasserError('wrong data');
+    }
+
   }
 
 
@@ -222,6 +345,43 @@
       args[v.name] = v.value;
     });
     return args;
+  }
+
+
+  async function getJQueryForm (selector) {
+    let jQuery = $.window.$;
+    while (!jQuery) {
+      await _.wait(50);
+      jQuery = $.window.$;
+    }
+    const f = jQuery(selector);
+    if (f.length > 0) {
+      return f;
+    }
+    return null;
+  }
+
+  function getURLFromJQueryForm (jForm) {
+    return new Promise((resolve, reject) => {
+      const jQuery = $.window.$;
+      jQuery.ajax({
+        dataType: 'json',
+        type: 'POST',
+        url: jForm.attr('action'),
+        data: jForm.serialize(),
+        success: (result) => {
+          if (result.url) {
+            resolve(result.url);
+          } else {
+            reject(new _.AdsBypasserError(result.message));
+          }
+        },
+        error: (xhr, status, error) => {
+          _.warn(xhr, status, error);
+          reject(new _.AdsBypasserError('request error'));
+        },
+      });
+    });
   }
 
 })();

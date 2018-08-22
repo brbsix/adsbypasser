@@ -3,11 +3,7 @@
 _.register({
   rule: [
     {
-      host: [
-        /^(www\.)?sylnk\.net$/,
-        /^dlneko\.(com|net|org)$/,
-        /^rumahsimpel\.com$/,
-      ],
+      host: /^(www\.)?sylnk\.net$/,
       query: /link=([^&]+)/,
     },
     {
@@ -16,46 +12,16 @@ _.register({
       query: /v=([^&]+)/,
     },
     {
-      host: /^(www\.)?safelinkair\.com$/,
-      path: /^\/code$/,
-      query: /(?:\?|&)link=([a-zA-Z0-9/=]+)(?:$|&)/,
-    },
-    {
       host: [
-        /^link\.filmku\.net$/,
-        /^www\.healthygress24\.ga$/,
-        /^kombatch\.amankan\.link$/,
-      ],
-      path: /^\/p\/(go|healty-lie)\.html$/,
-      query: /^\?url=([a-zA-Z0-9/=]+)$/,
-    },
-    {
-      host: [
-        /^(gadget|auto|sports)14\.pw$/,
-        /^motosport\.pw$/,
-        /^nar-04\.tk$/,
+        /^(sports14|motosport)\.pw$/,
         /^lindung\.in$/,
         /^motonews\.club$/,
         /^ww[23]\.picnictrans\.com$/,
-        /^gadget13\.com$/,
-        /^azhie\.net$/,
+        /^(azhie|skinnycat)\.net$/,
         /^ww2\.awsubs\.co$/,
-        /^autorp\.us$/,
         /^plantaheim\.web\.id$/,
       ],
       query: /^\?d=([a-zA-Z0-9/=]+)$/,
-    },
-    {
-      host: /^www\.anisubsia\.tk$/,
-      path: /^\/p\/link\.html$/,
-      query: /^\?url=([a-zA-Z0-9/=]+)$/,
-    },
-    {
-      host: [
-        /^www\.insurance1\.tech$/,
-        /^www\.freeanimeonline\.xyz$/,
-      ],
-      query: /^\?site=([a-zA-Z0-9/=]+)/,
     },
     {
       host: /^i\.gtaind\.com$/,
@@ -63,21 +29,37 @@ _.register({
     },
     // blogspot, kind of brutal
     {
-      host: /\.blogspot\.com?/,
+      host: [
+        // com
+        /\.blogspot\.com?/,
+        /^(www\.)?designmyhomee\.com$/,
+        /^(www\.)?losstor\.com$/,
+        /^kurosafe\.menantisenja\.com$/,
+        // xyz
+        /^(simaholina|autech)\.xyz$/,
+        /^(www\.)?id-securelink\.xyz$/,
+        /^(www\.)?converthinks\.xyz$/,
+        // else
+        /^(www\.)?tojros\.tk$/,
+        /^(www\.)?anjay\.info$/,
+        /^(www\.)?kakkoiisafe\.us$/,
+        /^(www\.)?kurosafe\.(website|online)$/,
+      ],
       query: [
         // id must be the first captured group
         /^\?url=([a-zA-Z0-9/=]+)$/,
         /^\?id=([a-zA-Z0-9/=]+)$/,
+        /^\?site=([a-zA-Z0-9/=]+)$/,
       ],
     },
     {
-      host: /^sehatlega\.com$/,
-      query: /^\?lanjut=([a-zA-Z0-9/=]+)$/,
-    },
-    {
-      host: /^shorten\.id$/,
-      // note the trailing `=`
-      query: /^\?url=([a-zA-Z0-9/=]+)=$/,
+      host: [
+        /^sehatlega\.com$/,
+        /^businessforyouand\.me$/,
+        /^plantaheim\.web\.id$/,
+        /^davinsurance\.com$/,
+      ],
+      query: /^\?r=([a-zA-Z0-9/=]+)$/,
     },
     {
       host: /^www\.compartiendofull\.net$/,
@@ -109,22 +91,13 @@ _.register({
         // safelinkreviewer.com
         // safelinkreview.co
         /^safelink(s?review(er)?)\.com?$/,
-        /^(getcomics|miuitutorial)\.gq$/,
-        /^awsubs\.cf$/,
-        /^awsubsco\.ga$/,
       ],
       query: /id=([\w\\]+=*)/,
     },
     {
       host: [
-        /^(www\.)?dlneko\.com$/,
-        /^(satuasia|tawaku)\.com$/,
-        /^ww3\.manteb\.in$/,
-        /^link\.filmku\.net$/,
-        /^www\.muucih\.com$/,
         /^(naisho|filmku|henpoi)\.lompat\.in$/,
         /^edogawa\.lon\.pw$/,
-        /^telolet\.in$/,
       ],
       query: /go=([\w\\]+=*)/,
     },
@@ -157,21 +130,58 @@ _.register({
 });
 
 _.register({
+  rule: {
+    host: [
+      /^(gameinfo|apasih)\.pw$/,
+      /^(www\.)?lifesurance\.info$/,
+      /^(intercelestial|sweetlantern)\.com$/,
+      /^awcar\.icu$/,
+      /^getinfos\.net$/,
+    ],
+    query: /^\?id=([a-zA-Z0-9/=]+)$/,
+  },
+  async ready () {
+    const f = $('form');
+    f.submit();
+  },
+});
+
+_.register({
+  rule: {
+    host: [
+      /^linkach\.com$/,
+    ],
+    query: /^\?id=([a-zA-Z0-9/=]+)$/,
+  },
+  async ready () {
+    const g = $('.humancheck form');
+    g.submit();
+  },
+});
+
+_.register({
   rule: [
     {
       host: [
-        /^(designinghomey|ani-share|sinopsisfilmku|autolinkach)\.com$/,
+        // club
         /^motonews\.club$/,
-        /^(autofans|landscapenature|apasih|gameinfo)\.pw$/,
-        /^(sidespace|erogedownload)\.net$/,
-        /^otoviral\.racing$/,
-        /^www\.lifesurance\.info$/,
+        /^(www\.)?bolaoke\.club$/,
+        // else
+        /^(ani-share|autolinkach)\.com$/,
+        /^sehatsegar\.net$/,
+        /^(autofans|landscapenature)\.pw$/,
+        /^(www\.)?lifesurance\.info$/,
       ],
       query: /get=([^&]+)/,
     },
     {
-      host: /^sipkur\.us$/,
-      path: /\.html$/,
+      host: [
+        /^(gameinfo|apasih)\.pw$/,
+        /^(www\.)?lifesurance\.info$/,
+        /^(intercelestial|sweetlantern|linkach)\.com$/,
+        /^awcar\.icu$/,
+        /^getinfos\.net$/,
+      ],
     },
   ],
   async ready (m) {
@@ -212,31 +222,13 @@ _.register({
 
 _.register({
   rule: {
-    host: /^aw-games\.net$/,
-  },
-  async ready () {
-    const a = $('.iklan a');
-    await $.openLink(a.href);
-  }
-});
-
-_.register({
-  rule: {
-    host: /^susutinv2\.com$/,
-  },
-  async ready () {
-    const s = $.searchFromScripts(/="([^"]+)",/);
-    if (!s) {
-      _.warn('site changed');
-      return;
-    }
-    await $.openLink(s[1]);
-  },
-});
-
-_.register({
-  rule: {
-    host: /^www\.njiir\.com$/,
+    host: [
+      // info
+      /^(www\.)?anjay\.info$/,
+      /^(www\.)?tetew\.info$/,
+      // else
+      /^www\.njiir\.com$/,
+    ],
   },
   async ready () {
     let a = $('div.download-link > a');

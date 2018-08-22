@@ -4,13 +4,10 @@
   _.register({
     rule: {
       host: [
-        /^(miragepics|funextra\.hostzi|imgrex|img3x)\.com$/,
+        /^miragepics\.com$/,
+        /^funextra\.hostzi\.com$/,
         /^bilder\.nixhelp\.de$/,
         /^imagecurl\.(com|org)$/,
-        /^imagevau\.eu$/,
-        /^img\.deli\.sh$/,
-        /^imgsicily\.it$/,
-        /^www\.imghere\.net$/,
       ],
       path: /^\/viewer\.php$/,
       query: /file=([^&]+)/,
@@ -18,13 +15,9 @@
     start: helper,
   });
 
-  // dwimg.com
   _.register({
     rule: {
-      host: [
-        /^(dwimg|imgsin)\.com$/,
-        /^www\.pictureshoster\.com$/,
-      ],
+      host: /^imgsin\.com$/,
       path: /^\/viewer\.php$/,
       query: /file=([^&]+)/,
     },
@@ -33,13 +26,9 @@
     },
   });
 
-  // imageview.me
   _.register({
     rule: {
-      host: [
-        /^img(nip|central|cream)\.com$/,
-        /^244pix\.com$/,
-      ],
+      host: /^(imgnip|imgcentral|imgcream)\.com$/,
       path: /^\/viewerr.*\.php$/,
       query: /file=([^&]+)/,
     },
