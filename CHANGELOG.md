@@ -1,7 +1,51 @@
 ## TBA
 
 * fixed
+    * imgprime.com
+    * picmoza.com
 * added
+* removed
+
+## v6.20.0
+
+* fixed
+    * adsrt.com
+    * bolaoke.club
+    * sehatsegar.net
+    * imagetwist.com
+* added
+    * akoam.net
+    * drivefiles.bid
+    * drive.jepitkertas.com
+    * link4win.net
+    * linksad.net
+    * swzz.xyz
+* removed
+    * akoam.com
+
+## v6.19.0
+
+* fixed
+    * autolinkach.com
+    * bolaoke.club
+    * davinsurance.com
+    * psl.pw
+* added
+    * adskipme.com
+    * cll.press
+    * fmlawkers.club
+    * hexafile.net
+    * indexmovie.club
+    * insurance-waifu.cf
+    * javlibrary.com
+    * link4win.com
+    * picclock.ru
+    * picmoza.com
+    * shrtfly.net
+    * skyinsurance.ml
+    * spacetica.com
+    * speedcar.club
+    * telolet.in
 * removed
     * susutinv2.com
 

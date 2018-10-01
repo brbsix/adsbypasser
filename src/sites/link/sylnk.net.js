@@ -35,6 +35,7 @@ _.register({
         /^(www\.)?designmyhomee\.com$/,
         /^(www\.)?losstor\.com$/,
         /^kurosafe\.menantisenja\.com$/,
+        /^drive\.jepitkertas\.com$/,
         // xyz
         /^(simaholina|autech)\.xyz$/,
         /^(www\.)?id-securelink\.xyz$/,
@@ -44,6 +45,7 @@ _.register({
         /^(www\.)?anjay\.info$/,
         /^(www\.)?kakkoiisafe\.us$/,
         /^(www\.)?kurosafe\.(website|online)$/,
+        /^(fmlawkers|indexmovie)\.club$/,
       ],
       query: [
         // id must be the first captured group
@@ -98,6 +100,7 @@ _.register({
       host: [
         /^(naisho|filmku|henpoi)\.lompat\.in$/,
         /^edogawa\.lon\.pw$/,
+        /^telolet\.in$/,
       ],
       query: /go=([\w\\]+=*)/,
     },
@@ -134,9 +137,12 @@ _.register({
     host: [
       /^(gameinfo|apasih)\.pw$/,
       /^(www\.)?lifesurance\.info$/,
-      /^(intercelestial|sweetlantern)\.com$/,
+      /^speedcar\.club$/,
+      /^(www\.)?bolaoke\.club$/,
+      /^(intercelestial|sweetlantern|davinsurance)\.com$/,
       /^awcar\.icu$/,
-      /^getinfos\.net$/,
+      /^skyinsurance\.ml$/,
+      /^(getinfos|sehatsegar)\.net$/,
     ],
     query: /^\?id=([a-zA-Z0-9/=]+)$/,
   },
@@ -149,7 +155,7 @@ _.register({
 _.register({
   rule: {
     host: [
-      /^linkach\.com$/,
+      /^(linkach|autolinkach)\.com$/,
     ],
     query: /^\?id=([a-zA-Z0-9/=]+)$/,
   },
@@ -178,9 +184,12 @@ _.register({
       host: [
         /^(gameinfo|apasih)\.pw$/,
         /^(www\.)?lifesurance\.info$/,
-        /^(intercelestial|sweetlantern|linkach)\.com$/,
+        /^speedcar\.club$/,
+        /^(www\.)?bolaoke\.club$/,
+        /^(intercelestial|sweetlantern|linkach|autolinkach|davinsurance)\.com$/,
         /^awcar\.icu$/,
-        /^getinfos\.net$/,
+        /^skyinsurance\.ml$/,
+        /^(getinfos|sehatsegar)\.net$/,
       ],
     },
   ],
@@ -204,6 +213,27 @@ _.register({
     s = s[1].match(/go=([^&]+)/);
     s = atob(s[1]);
     await $.openLink(s);
+  },
+});
+
+_.register({
+  rule: {
+    host: /^hexafile\.net$/,
+    path: /^\/[a-zA-Z0-9]+/,
+  },
+  async ready () {
+    const h = $.searchFromScripts(/window\.location="([^"]+)";/);
+    await $.openLink(h[1]);
+  },
+});
+
+_.register({
+  rule: {
+    host: /^drivefiles\.bid$/,
+  },
+  async ready () {
+    const d = $.searchFromScripts(/window\.open\('([^']+)'\);/);
+    await $.openLink(d[1]);
   },
 });
 
@@ -235,5 +265,16 @@ _.register({
     a = a.href.match(/r=(.*)$/);
     a = atob(a[1]);
     await $.openLink(a);
+  },
+});
+
+_.register({
+  rule: {
+    host: /^spacetica\.com$/,
+    path: /^\/\w+$/,
+  },
+  async ready () {
+    const l = $('p > b > a');
+    await $.openLink(l.href);
   },
 });

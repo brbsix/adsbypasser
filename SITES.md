@@ -98,6 +98,7 @@
     * naughtygate.net
     * nimzshare.com
     * pic.hotimg.site
+    * picmoza.com
     * picz.site
     * pixup.us
     * pop-img.info
@@ -283,13 +284,18 @@
     * davinsurance.com
     * decrypt.safelinkconverter.com
     * designmyhomee.com
+    * drivefiles.bid
+    * drive.jepitkertas.com
     * edogawa.lon.pw
     * filmku.lompat.in
+    * fmlawkers.club
     * gameinfo.pw
     * getinfos.net
     * gtaind.com
     * henpoi.lompat.in
+    * hexafile.net
     * id-securelink.xyz
+    * indexmovie.club
     * intercelestial.com
     * kakkoiisafe.us
     * kombatch.loncat.pw
@@ -318,10 +324,14 @@
     * short.awsubs.co
     * short.awsubs.me
     * skinnycat.net
+    * skyinsurance.ml
+    * spacetica.com
+    * speedcar.club
     * sports14.pw
     * srelink.com
     * sweetlantern.com
     * sylnk.net
+    * telolet.in
     * tetew.info
     * tojros.tk
     * ww2.awsubs.co
@@ -375,6 +385,7 @@
     * adpop.me
     * adshort.co
     * adshorte.com
+    * adskipme.com
     * adslink.pw
     * adsrt.com
     * adsvy.com
@@ -386,6 +397,7 @@
     * clik.pw
     * clk.press
     * clk.sh
+    * cll.press
     * coinlink.co
     * converthinks.xyz
     * coshink.co
@@ -429,10 +441,13 @@
     * licklink.net
     * linclik.com
     * link4.me
+    * link4win.com
+    * link4win.net
     * linkdrop.net
     * linkexa.com
     * linkfly.gaosmedia.com
     * linkrex.net
+    * linksad.net
     * linkvip.tk
     * link-zero.com
     * loadurl.com
@@ -469,6 +484,7 @@
     * shrt10.com
     * shrten.xyz
     * shrtfly.com
+    * shrtfly.net
     * simaholina.xyz
     * skips.link
     * spamlink.org
@@ -578,7 +594,7 @@
     * ah.pe
     * ah-informatique.com
     * aka.gr
-    * akoam.com
+    * akoam.net
     * bayimg.com
     * beeimg.com
     * biglistofwebsites.com
@@ -637,9 +653,11 @@
     * imgdollar.com
     * imgmass.com
     * imgvault.pw
+    * insurance-waifu.cf
     * ipic.su
     * itw.me
     * ity.im
+    * javlibrary.com
     * jheberg.net
     * keptarolo.hu
     * kingofshrink.com
@@ -673,6 +691,7 @@
     * pic-money.ru
     * pic-upload.de
     * piccash.net
+    * picclock.ru
     * picnictrans.com
     * picpic.online
     * picshare.geenza.com
@@ -698,6 +717,7 @@
     * st.wardhanime.net
     * subirimagenes.com
     * supercheats.com
+    * swzz.xyz
     * techfunda.net
     * thinfi.com
     * tinyarrows.com

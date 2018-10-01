@@ -23,14 +23,15 @@
     rule: {
       host: [
         // com
-        /^(dz4link|gocitlink|3rabcut|short2win)\.com$/,
+        /^(dz4link|gocitlink|3rabcut|short2win|adsrt)\.com$/,
         /^(tmearn|payshorturl|urltips|shrinkearn|itiad|cutsouf)\.com$/,
         /^(earn-url|bit-url|cut-win|link-zero|cut-earn)\.com$/,
         /^(vy\.)?adsvy\.com$/,
-        /^(linkexa|admew|shrtfly|kuylink|cut4links)\.com$/,
+        /^(linkexa|admew|shrtfly|kuylink|cut4links|adskipme)\.com$/,
         // net
         /^(safelinku|tinylinks|licklink|linkrex|zlshorte)\.net$/,
-        /^(vnurl|vinaurl|foxurl|short2win|cashat)\.net$/,
+        /^(vnurl|vinaurl|foxurl|short2win|cashat|shrtfly)\.net$/,
+        /^(link4win|linksad)\.net$/,
         // else
         /^(trlink|wolink|tocdo|megaurl)\.in$/,
         /^(petty|skips|tr)\.link$/,
@@ -42,10 +43,10 @@
         /^(shink|shrten|gg-l)\.xyz$/,
         /^mlink\.club$/,
         /^(igram|gram)\.im$/,
-        /^clk\.(press|sh)$/,
+        /^(clk|cll)\.(press|sh)$/,
         /^short\.pe$/,
         /^urlcloud\.us$/,
-        /^(123link|clik|tokenfly|getlink)\.pw$/,
+        /^(123link|clik|tokenfly|getlink|psl)\.pw$/,
         /^(icutit|earnbig|cutearn)\.ca$/,
         /^koylinks\.win$/,
         /^lopte\.pro$/,
@@ -87,10 +88,10 @@
       host: [
         // com
         /^(cut-urls|linclik|premiumzen|shrt10|by6dk|mikymoons|man2pro)\.com$/,
-        /^(mykinggo|win4cut)\.com$/,
+        /^(mykinggo|win4cut|link4win)\.com$/,
         /^short\.pastewma\.com$/,
         /^linkfly\.gaosmedia\.com$/,
-        /^(adshorte|adsrt)\.com$/,
+        /^adshorte\.com$/,
         /^(www\.)?viralukk\.com$/,
         /^(www\.)?niagoshort\.com$/,
         /^(oturl|loadurl)\.com$/,
@@ -102,7 +103,7 @@
         /^(urle|adshort)\.co$/,
         /^(weefy|adbull|zeiz|link4|adcoin)\.me$/,
         /^(adbilty|taive)\.in$/,
-        /^(psl|twik|adslink)\.pw$/,
+        /^(twik|adslink)\.pw$/,
         /^(curs|crus|4cut|u2s|l2s)\.io$/,
         /^dzurl\.ml$/,
         /^petty\.link$/,
