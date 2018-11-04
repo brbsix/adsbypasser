@@ -1,10 +1,38 @@
 ## TBA
 
 * fixed
+    * fastpic.ru
+* added
+* removed
+
+## v6.22.0
+
+* fixed
+    * imgoutlet.pw
+* added
+    * 22pixx.xyz
+    * adzurl.cf
+    * cutpaid.com
+    * naturalhealthy.xyz
+    * oload.cc
+    * shortglobal.com
+    * tpx.me
+    * vnurl.xyz
+    * xxx.sexex.xyz
+
+## v6.21.0
+
+* fixed
+    * beeimg.com
+    * imagetwist.com
+    * imgoutlet.pw
     * imgprime.com
     * picmoza.com
 * added
-* removed
+    * autoride.pw
+    * javtor.com
+    * oload.cloud
+    * topurl.net
 
 ## v6.20.0
 

@@ -23,24 +23,25 @@
     rule: {
       host: [
         // com
-        /^(dz4link|gocitlink|3rabcut|short2win|adsrt)\.com$/,
+        /^(dz4link|gocitlink|3rabcut|short2win|adsrt|shortglobal)\.com$/,
         /^(tmearn|payshorturl|urltips|shrinkearn|itiad|cutsouf)\.com$/,
         /^(earn-url|bit-url|cut-win|link-zero|cut-earn)\.com$/,
         /^(vy\.)?adsvy\.com$/,
         /^(linkexa|admew|shrtfly|kuylink|cut4links|adskipme)\.com$/,
+        /^cutpaid\.com$/,
         // net
         /^(safelinku|tinylinks|licklink|linkrex|zlshorte)\.net$/,
         /^(vnurl|vinaurl|foxurl|short2win|cashat|shrtfly)\.net$/,
-        /^(link4win|linksad)\.net$/,
+        /^(link4win|linksad|topurl)\.net$/,
         // else
         /^(trlink|wolink|tocdo|megaurl)\.in$/,
         /^(petty|skips|tr)\.link$/,
         /^idsly\.(com|bid)$/,
-        /^(adbilty|adpop|payskip|wicr|ujv)\.me$/,
+        /^(adbilty|adpop|payskip|wicr|ujv|tpx)\.me$/,
         /^wi\.cr$/,
         /^(oke|cuon|linktor|flylink)\.io$/,
         /^(3bst|coinlink|itiurl|coshink)\.co$/,
-        /^(shink|shrten|gg-l)\.xyz$/,
+        /^(shink|shrten|gg-l|vnurl)\.xyz$/,
         /^mlink\.club$/,
         /^(igram|gram)\.im$/,
         /^(clk|cll)\.(press|sh)$/,
@@ -48,6 +49,7 @@
         /^urlcloud\.us$/,
         /^(123link|clik|tokenfly|getlink|psl)\.pw$/,
         /^(icutit|earnbig|cutearn)\.ca$/,
+        /^adzurl\.cf$/,
         /^koylinks\.win$/,
         /^lopte\.pro$/,
         /^(www\.)?pnd\.tl$/,

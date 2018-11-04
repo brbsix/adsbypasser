@@ -60,6 +60,7 @@ _.register({
         /^businessforyouand\.me$/,
         /^plantaheim\.web\.id$/,
         /^davinsurance\.com$/,
+        /^naturalhealthy\.xyz$/,
       ],
       query: /^\?r=([a-zA-Z0-9/=]+)$/,
     },
@@ -135,7 +136,7 @@ _.register({
 _.register({
   rule: {
     host: [
-      /^(gameinfo|apasih)\.pw$/,
+      /^(gameinfo|apasih|autoride)\.pw$/,
       /^(www\.)?lifesurance\.info$/,
       /^speedcar\.club$/,
       /^(www\.)?bolaoke\.club$/,
@@ -182,7 +183,7 @@ _.register({
     },
     {
       host: [
-        /^(gameinfo|apasih)\.pw$/,
+        /^(gameinfo|apasih|autoride)\.pw$/,
         /^(www\.)?lifesurance\.info$/,
         /^speedcar\.club$/,
         /^(www\.)?bolaoke\.club$/,

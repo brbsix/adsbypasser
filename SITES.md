@@ -1,4 +1,5 @@
 * adf.ly
+    * queuecosm.bid
 * linkbucks
     * allanalpass.com
     * drstickyfingers.com
@@ -111,6 +112,7 @@
     * wpc8.com
     * xximg.net
     * xxx.pornscreen.xyz
+    * xxx.sexex.xyz
     * xxxscreens.com
     * xxxwebdlxxx.org
 * imageporter
@@ -274,6 +276,7 @@
     * apasih.pw
     * autofans.pw
     * autolinkach.com
+    * autoride.pw
     * awcar.icu
     * azhie.net
     * blogspot.com
@@ -311,6 +314,7 @@
     * motonews.club
     * motosport.pw
     * naisho.lompat.in
+    * naturalhealthy.xyz
     * njiir.com
     * plantaheim.web.id
     * safelinkconverter.com
@@ -390,6 +394,7 @@
     * adsrt.com
     * adsvy.com
     * adurl.id
+    * adzurl.cf
     * autech.xyz
     * bit-url.com
     * by6dk.com
@@ -409,6 +414,7 @@
     * cutearn.ca
     * cut-earn.com
     * cutl.in
+    * cutpaid.com
     * cutsouf.com
     * cut-urls.com
     * cut-w.in
@@ -479,6 +485,7 @@
     * short2win.com
     * short2win.net
     * shortad.cf
+    * shortglobal.com
     * shortit.ca
     * shrinkearn.com
     * shrt10.com
@@ -496,6 +503,8 @@
     * tny.ec
     * tocdo.in
     * tokenfly.pw
+    * topurl.net
+    * tpx.me
     * tr.link
     * trlink.in
     * tui.click
@@ -510,6 +519,7 @@
     * viralukk.com
     * vivads.net
     * vnurl.net
+    * vnurl.xyz
     * weefy.me
     * wi.cr
     * wicr.me
@@ -534,6 +544,8 @@
     * 10co.me
     * 10co.xyz
 * openload.co
+    * oload.cc
+    * oload.cloud
     * oload.download
     * oload.info
     * oload.site
@@ -658,6 +670,7 @@
     * itw.me
     * ity.im
     * javlibrary.com
+    * javtor.com
     * jheberg.net
     * keptarolo.hu
     * kingofshrink.com
