@@ -25,7 +25,7 @@
         // com
         /^(dz4link|gocitlink|3rabcut|short2win|adsrt|shortglobal)\.com$/,
         /^(tmearn|payshorturl|urltips|shrinkearn|itiad|cutsouf)\.com$/,
-        /^(earn-url|bit-url|cut-win|link-zero|cut-earn)\.com$/,
+        /^(earn-url|bit-url|cut-win|link-zero|cut-earn|oturl)\.com$/,
         /^(vy\.)?adsvy\.com$/,
         /^(linkexa|admew|shrtfly|kuylink|cut4links|adskipme)\.com$/,
         /^cutpaid\.com$/,
@@ -44,7 +44,7 @@
         /^(shink|shrten|gg-l|vnurl)\.xyz$/,
         /^mlink\.club$/,
         /^(igram|gram)\.im$/,
-        /^(clk|cll)\.(press|sh)$/,
+        /^(clk|cll)\.(press|sh|icu)$/,
         /^short\.pe$/,
         /^urlcloud\.us$/,
         /^(123link|clik|tokenfly|getlink|psl)\.pw$/,
@@ -87,6 +87,17 @@
 
   _.register({
     rule: {
+      host: /^www\.shortly\.xyz$/,
+      path: /^\/link$/,
+    },
+    async ready () {
+      const handler = new ShortlyHandler();
+      await handler.call();
+    },
+  });
+
+  _.register({
+    rule: {
       host: [
         // com
         /^(cut-urls|linclik|premiumzen|shrt10|by6dk|mikymoons|man2pro)\.com$/,
@@ -96,7 +107,7 @@
         /^adshorte\.com$/,
         /^(www\.)?viralukk\.com$/,
         /^(www\.)?niagoshort\.com$/,
-        /^(oturl|loadurl)\.com$/,
+        /^(loadurl)\.com$/,
         /^(cut4link|raolink)\.com$/,
         // net
         /^www\.worldhack\.net$/,
@@ -133,6 +144,7 @@
         '[class$="Overlay"]',
         '#__random_class_name__',
         '#headlineatas',
+        '#myModal',
       ].join(', ');
 
       // TODO extract to paramater
@@ -147,6 +159,10 @@
     removeOverlay () {
       $.remove(this._overlaySelector);
       $.block(this._overlaySelector, document.body);
+      // oturl.com will set overflow to hidden
+      setInterval(() => {
+        document.body.style.overflow = 'initial';
+      }, 500);
     }
 
     removeFrame () {
@@ -339,6 +355,40 @@
       throw new _.AdsBypasserError('wrong data');
     }
 
+  }
+
+  class ShortlyHandler extends AbstractHandler {
+
+    constructor() {
+      super();
+    }
+
+    prepare () {
+      return true;
+    }
+
+    async getMiddleware () {
+      // the id has been hidden, find it from links
+      let a = $('#myModal .btn-primary');
+      a = a.pathname.match(/^\/r\/(.+)/);
+      return a[1];
+    }
+
+    withoutMiddleware () {
+      _.info('no page');
+    }
+
+    async getURL (id) {
+      while (true) {
+        const url = await $.post('getlink.php', {
+          id,
+        });
+        if (url) {
+          return url;
+        }
+        await _.wait(500);
+      }
+    }
   }
 
 

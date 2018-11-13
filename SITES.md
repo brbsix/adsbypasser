@@ -295,6 +295,7 @@
     * gameinfo.pw
     * getinfos.net
     * gtaind.com
+    * healthtod.com
     * henpoi.lompat.in
     * hexafile.net
     * id-securelink.xyz
@@ -400,6 +401,7 @@
     * by6dk.com
     * cashat.net
     * clik.pw
+    * clk.icu
     * clk.press
     * clk.sh
     * cll.press
@@ -487,6 +489,7 @@
     * shortad.cf
     * shortglobal.com
     * shortit.ca
+    * shortly.xyz
     * shrinkearn.com
     * shrt10.com
     * shrten.xyz
@@ -595,6 +598,7 @@
     * 1be.biz
     * 1dl.biz
     * 1ink.cc
+    * 1ink.info
     * 1pics.ru
     * 1tiny.net
     * 4fun.tw
@@ -725,6 +729,7 @@
     * screenlist.ru
     * shrink-service.it
     * sht.io
+    * shtlink.co
     * similarsites.com
     * spaste.com
     * st.wardhanime.net
@@ -753,5 +758,6 @@
     * viidii.info
     * vir.al
     * vzturl.com
+    * won.pe
     * yep.it
     * yooclick.com

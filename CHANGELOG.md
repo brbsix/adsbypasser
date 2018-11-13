@@ -1,9 +1,25 @@
 ## TBA
 
 * fixed
-    * fastpic.ru
 * added
 * removed
+
+## v6.24.0
+
+* added
+    * 1ink.info
+    * clk.icu
+    * healthtod.com
+    * shortly.xyz
+
+## v6.23.0
+
+* fixed
+    * fastpic.ru
+    * oturl.com
+* added
+    * shtlink.co
+    * won.pe
 
 ## v6.22.0
 
