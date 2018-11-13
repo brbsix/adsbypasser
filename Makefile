@@ -34,7 +34,9 @@ node_modules: package.json pull
 	npm prune
 
 build: node_modules src
+	n 8.9.3
 	npm run build
+	n lts
 
 $(US_PATH): build
 
