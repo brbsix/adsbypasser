@@ -25,38 +25,47 @@
         // com
         /^(dz4link|gocitlink|3rabcut|short2win|adsrt|shortglobal)\.com$/,
         /^(tmearn|payshorturl|urltips|shrinkearn|itiad|cutsouf)\.com$/,
-        /^(earn-url|bit-url|cut-win|link-zero|cut-earn|oturl)\.com$/,
+        /^(earn-url|bit-url|cut-win|link-zero|cut-earn|oturl|glory-link)\.com$/,
         /^(vy\.)?adsvy\.com$/,
-        /^(linkexa|admew|shrtfly|kuylink|cut4links|adskipme)\.com$/,
-        /^cutpaid\.com$/,
+        /^(linkexa|admew|shrtfly|kuylink|cut4links|adskipme|skipurls)\.com$/,
+        /^(cutpaid|smarteasystudy|cyahealth|ershadat|z2i)\.com$/,
+        /^win4cut\.com$/,
         // net
         /^(safelinku|tinylinks|licklink|linkrex|zlshorte)\.net$/,
         /^(vnurl|vinaurl|foxurl|short2win|cashat|shrtfly)\.net$/,
-        /^(link4win|linksad|topurl)\.net$/,
+        /^(link4win|linksad|topurl|xemlink)\.net$/,
+        // pw
+        /^(123link|clik|tokenfly|getlink|psl|pss)\.pw$/,
+        /^(www\.)?lwt\.pw$/,     
         // else
-        /^(trlink|wolink|tocdo|megaurl)\.in$/,
-        /^(petty|skips|tr)\.link$/,
+        /^(trlink|wolink|tocdo)\.in$/,
+        /^(petty|skips|tr|zutrox)\.link$/,
+        /^megaurl\.(in|link)$/,
         /^idsly\.(com|bid)$/,
-        /^(adbilty|adpop|payskip|wicr|ujv|tpx)\.me$/,
+        /^(adbilty|adpop|payskip|wicr|ujv|tpx|adsrt)\.me$/,
         /^wi\.cr$/,
-        /^(oke|cuon|linktor|flylink)\.io$/,
-        /^(3bst|coinlink|itiurl|coshink)\.co$/,
+        /^(oke|cuon|cuio|linktor|flylink)\.io$/,
+        /^(3bst|coinlink|itiurl|coshink|link5s)\.co$/,
         /^(shink|shrten|gg-l|vnurl)\.xyz$/,
         /^mlink\.club$/,
         /^(igram|gram)\.im$/,
-        /^(clk|cll)\.(press|sh|icu)$/,
+        /^(clk|cll)\.(press|ink|sh|icu)$/,
         /^short\.pe$/,
         /^urlcloud\.us$/,
-        /^(123link|clik|tokenfly|getlink|psl)\.pw$/,
         /^(icutit|earnbig|cutearn)\.ca$/,
-        /^adzurl\.cf$/,
-        /^koylinks\.win$/,
+        /^(adzurl|link2link)\.cf$/,
+        /^(koylinks|buy-in-599rs)\.win$/,
         /^lopte\.pro$/,
         /^(www\.)?pnd\.tl$/,
         /^(tny|tiny)\.ec$/,
         /^tl\.tc$/,
+        /^e2s\.cc$/,
         /^lyon\.kim$/,
         /^linkvip\.tk$/,
+        /^stfly\.press$/,
+        /^businessiss2\.info$/,
+        /^eatings\.stream$/,
+        /^8o\.ee$/,
       ],
     },
     async ready () {
@@ -101,14 +110,11 @@
       host: [
         // com
         /^(cut-urls|linclik|premiumzen|shrt10|by6dk|mikymoons|man2pro)\.com$/,
-        /^(mykinggo|win4cut|link4win)\.com$/,
+        /^(mykinggo|link4win|loadurl|cut4link|raolink|adshorte)\.com$/,
         /^short\.pastewma\.com$/,
         /^linkfly\.gaosmedia\.com$/,
-        /^adshorte\.com$/,
         /^(www\.)?viralukk\.com$/,
         /^(www\.)?niagoshort\.com$/,
-        /^(loadurl)\.com$/,
-        /^(cut4link|raolink)\.com$/,
         // net
         /^www\.worldhack\.net$/,
         /^(eklink|vivads)\.net$/,
@@ -123,9 +129,9 @@
         /^shortad\.cf$/,
         /^123link\.(io|co|press|pro)$/,
         /^git\.tc$/,
-        /^adfu\.us$/,
+        /^(adfu|linku)\.us$/,
         /^shortit\.ca$/,
-        /^spamlink\.org$/,
+        /^(spamlink|idsly)\.org$/,
         /^royurls\.bid$/,
         /^za\.gl$/,
       ],
@@ -305,7 +311,7 @@
     }
 
     async getMiddleware () {
-      return await getJQueryForm('#mylink');
+      return await getJQueryForm('#mylink1');
     }
 
   }

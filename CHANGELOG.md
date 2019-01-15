@@ -1,8 +1,76 @@
 ## TBA
 
 * fixed
+    * win4cut.com
 * added
 * removed
+
+## v6.28.0
+
+* fixed
+    * greget.space
+* added
+    * 8o.ee
+    * buy-in-599rs.win
+    * cyahealth.com
+    * eatings.stream
+    * ershadat.com
+    * idsly.org
+    * link5s.co
+    * linku.us
+    * safelinkreviewx.com
+    * xemlink.net
+    * z2i.com
+* removed
+    * pixsense.net
+    * safelinkconverter2.com
+    * safelinkreviewer.com
+    * safelinksreview.com
+
+## v6.27.0
+
+* fixed
+    * linkdrop.net
+    * 1be.biz
+* added
+    * businessiss2.info
+    * link2link.cf
+    * lonelymoon.net
+    * megaurl.link
+    * skipurls.com
+    * smarteasystudy.com
+    * stt.awsubs.co
+
+## v6.26.0
+
+* fixed
+    * imgfile.net
+    * xxxwebdlxxx.org
+* added
+    * awsubsco.ml
+    * clk.ink
+    * cuio.io
+    * irisvera.com
+    * oload.fun
+    * plantaheim.com
+    * probusinesshub.com
+    * pss.pw
+
+## v6.25.0
+
+* fixed
+    * 22pixx.xyz
+    * spacetica.com
+* added
+    * adsrt.me
+    * e2s.cc
+    * glory-link.com
+    * idnation.net
+    * lwt.pw
+    * picbaron.com
+    * stfly.press
+    * teknologilink.com
+    * zutrox.link
 
 ## v6.24.0
 

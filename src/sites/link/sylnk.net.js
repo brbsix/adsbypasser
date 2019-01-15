@@ -19,7 +19,8 @@ _.register({
         /^ww[23]\.picnictrans\.com$/,
         /^(azhie|skinnycat)\.net$/,
         /^ww2\.awsubs\.co$/,
-        /^plantaheim\.web\.id$/,
+        /^plantaheim(\.web\.id|\.com)$/,
+        /^irisvera\.com$/,
       ],
       query: /^\?d=([a-zA-Z0-9/=]+)$/,
     },
@@ -46,6 +47,7 @@ _.register({
         /^(www\.)?kakkoiisafe\.us$/,
         /^(www\.)?kurosafe\.(website|online)$/,
         /^(fmlawkers|indexmovie)\.club$/,
+        /^micin\.online$/,
       ],
       query: [
         // id must be the first captured group
@@ -58,10 +60,11 @@ _.register({
       host: [
         /^sehatlega\.com$/,
         /^businessforyouand\.me$/,
-        /^plantaheim\.web\.id$/,
+        /^plantaheim(\.web\.id|\.com)$/,
         /^davinsurance\.com$/,
         /^naturalhealthy\.xyz$/,
         /^healthtod\.com$/,
+        /^irisvera\.com$/,
       ],
       query: /^\?r=([a-zA-Z0-9/=]+)$/,
     },
@@ -86,15 +89,14 @@ _.register({
     {
       host: [
         // safelinkconverter.com
-        // safelinkconverter2.com
         // link.safelinkconverter.com
         // decrypt.safelinkconverter.com
-        /(^|\.)safelinkconverter2?\.com$/,
+        // decrypt2.safelinkconverter.com
         // safelinkreview.com
-        // safelinksreview.com
-        // safelinkreviewer.com
+        // safelinkreviewx.com
         // safelinkreview.co
-        /^safelink(s?review(er)?)\.com?$/,
+        /(^|\.)safelink(converter|reviewx?)\.com?$/,
+        /^awsubsco\.ml$/,
       ],
       query: /id=([\w\\]+=*)/,
     },
@@ -144,7 +146,8 @@ _.register({
       /^(intercelestial|sweetlantern|davinsurance)\.com$/,
       /^awcar\.icu$/,
       /^skyinsurance\.ml$/,
-      /^(getinfos|sehatsegar)\.net$/,
+      /^(getinfos|sehatsegar|lonelymoon)\.net$/,
+      /^stt\.awsubs\.co$/,
     ],
     query: /^\?id=([a-zA-Z0-9/=]+)$/,
   },
@@ -191,7 +194,8 @@ _.register({
         /^(intercelestial|sweetlantern|linkach|autolinkach|davinsurance)\.com$/,
         /^awcar\.icu$/,
         /^skyinsurance\.ml$/,
-        /^(getinfos|sehatsegar)\.net$/,
+        /^(getinfos|sehatsegar|lonelymoon)\.net$/,
+        /^stt\.awsubs\.co$/,
       ],
     },
   ],
@@ -276,7 +280,44 @@ _.register({
     path: /^\/\w+$/,
   },
   async ready () {
-    const l = $('p > b > a');
+    const l = $('.btn');
+    await $.openLink(l.href);
+  },
+});
+
+_.register({
+  rule: {
+    host: /^daunshorte\.teknologilink\.com$/,
+    path: /^\/linkshortelink\/safelink\.php$/,
+  },
+  async ready () {
+    const l = $('div.article > div:nth-child(1) > center > a');
+    await $.openLink(l.href, {
+      referer: false,
+    });
+  },
+});
+
+_.register({
+  rule: {
+    host: /^teknosafe\.teknologilink\.com$/,
+    path: /^\/linkteknolink\/safelinkscript\.php$/,
+  },
+  async ready () {
+    const l = $('#templatemo_content > div:nth-child(4) > a:nth-child(4)');
+    await $.openLink(l.href, {
+      referer: false,
+    });
+  },
+});
+
+_.register({
+  rule: {
+    host: /^idnation\.net$/,
+    query: /^\?page=/,
+  },
+  async ready () {
+    const l = $('#linko');
     await $.openLink(l.href);
   },
 });
